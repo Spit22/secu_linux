@@ -10,6 +10,9 @@ Welcome to TD Sécurité Linux's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   src/installation.md
+   src/hardening_PAM.md
+
 
 
 Indices and tables
