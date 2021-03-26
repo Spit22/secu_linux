@@ -1,0 +1,37 @@
+# Hardening PAM
+
+-classification (niveau ANSSI,type de mesure,  ...)
+    -sources
+    -procédures
+    -commentaires (résultat, mesure écartée, conservée, adaptée,...)
+
+## Classification
+
+* Niveau ANSSI : minimal
+* Authentification
+* Gestion des comptes
+
+
+## Sources
+
+* [ANSSI](https://www.ssi.gouv.fr/uploads/2016/01/linux_configuration-fr-v1.2.pdf)
+
+## Procédures
+
+![Mot de passe root](img/PAM/install_libpam.PNG)
+
+### Contre mesures bruteforce
+
+![Mot de passe root](img/PAM/bruteforce_pass_sshd.PNG)
+
+![Mot de passe root](img/PAM/bruteforce_pass_login.PNG)
+
+### Politiques de password
+
+![Mot de passe root](img/PAM/password_policy.PNG)
+
+![Mot de passe root](img/PAM/password_policy_poc.PNG)
+
+
+
+## Commentaires
