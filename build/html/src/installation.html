@@ -52,13 +52,20 @@
 </div>
 <div class="section" id="procedures">
 <h2>Procédures<a class="headerlink" href="#procedures" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Définissons un motde passe robuste pour l”utilisateur root</p>
 <p><img alt="Mot de passe root" src="../_images/mdp_root.png" /></p>
+<p>Créons ensuite un utilisateur nommé olivier :</p>
 <p><img alt="Création de l'utilisateur olivier" src="../_images/creation_olivier.png" /></p>
-<p><img alt="Mot de passe root" src="../_images/choix_LVM.png" /></p>
-<p><img alt="Mot de passe root" src="../_images/choix_partition.png" /></p>
+<p>Choisissons de stocker nos données dans des LVM chiffrés :</p>
+<p><img alt="Choix LVM" src="../_images/choix_LVM.png" /></p>
+<p>D”après les directives que nous avons reçus, nous ne créons qu”une seule partition</p>
+<p><img alt="Choix partition" src="../_images/choix_partition.png" /></p>
+<p>Définissons un mot de passe robuste pour le chiffrement des LVM :</p>
 <p><img alt="Mot de passe root" src="../_images/mdp_chiffrement_disque.png" /></p>
+<p>Fixons la taille maximale pour notre unique partition :</p>
 <p><img alt="Mot de passe root" src="../_images/choix_taille_partition.png" /></p>
 <p>On choisit d’utiliser les 8Go pour la partition root, et de n’affecter aucun SWAP. En effet, la machine virtuelle créée possède 4Go RAM, ce qui ne sera jamais dépassé pour notre utilisation.</p>
+<p>Voici le résumé du partitionnement :</p>
 <p><img alt="Mot de passe root" src="../_images/resume_partition.png" /></p>
 <p><img alt="Mot de passe root" src="../_images/choix_miroir.png" /></p>
 <p><img alt="Mot de passe root" src="../_images/choix_logiciel.png" /></p>
@@ -97,7 +104,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="hardening_PAM.html">Hardening PAM</a></li>
-<li class="toctree-l1"><a class="reference internal" href="iptables_sortant.html">Hardening PAM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="iptables_sortant.html">Parefeu local</a></li>
 </ul>
 
 <div class="relations">

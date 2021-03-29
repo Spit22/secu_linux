@@ -15,6 +15,7 @@
     <script src="../_static/translations.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="next" title="Parefeu local" href="iptables_entrant.html" />
     <link rel="prev" title="Procédure d”installation" href="installation.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
@@ -44,26 +45,59 @@
 <li><p>Niveau ANSSI : minimal</p></li>
 <li><p>Authentification</p></li>
 <li><p>Gestion des comptes</p></li>
+<li><p>Double authentification</p></li>
 </ul>
 </div>
 <div class="section" id="sources">
 <h2>Sources<a class="headerlink" href="#sources" title="Lien permanent vers ce titre">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://www.ssi.gouv.fr/uploads/2016/01/linux_configuration-fr-v1.2.pdf">ANSSI</a></p></li>
+<li><p><a class="reference external" href="https://www.vultr.com/docs/how-to-setup-two-factor-authentication-2fa-for-ssh-on-debian-9-using-google-authenticator">2FA</a></p></li>
 </ul>
 </div>
 <div class="section" id="procedures">
 <h2>Procédures<a class="headerlink" href="#procedures" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Commençons par installer la librairie <em>libpam</em> :</p>
 <p><img alt="Mot de passe root" src="../_images/install_libpam.PNG" /></p>
+<div class="section" id="desactivation-du-compte-root">
+<h3>Désactivation du compte root<a class="headerlink" href="#desactivation-du-compte-root" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Le but de cette étapes est de bloquer l”accès au compte root. Pour cela, nous allons utiliser deux mécanismes :</p>
+<ul class="simple">
+<li><p>interdiction au groupe <em>wheel</em> (groupe que nous allons créer pour les superutilisateurs) de se connecter en tant que root</p></li>
+<li><p>désactivation du shell de l”utilisateur root</p></li>
+</ul>
+<p>Le groupe <em>wheel</em> est l”équivalent du groupe <em>sudo</em> chez RedHat.</p>
+<p>Commençons par créer le groupe <em>wheel</em> :</p>
+<p><img alt="Mot de passe root" src="../_images/group_wheel.PNG" /></p>
+<p>Bloquons ensuite l”accès au compte root aux membres du groupe <em>wheel</em> :</p>
+<p><img alt="Mot de passe root" src="../_images/disable_root_wheel.PNG" /></p>
+<p><img alt="Mot de passe root" src="../_images/disable_root_wheel_2.PNG" /></p>
+<p>Pour que ce mécanisme fonctionne, il est impératif d”ajouter les superutilisateurs (membres du groupe <em>sudo</em>) au groupe <em>wheel</em>.</p>
+<p>Désactivons enfin le shell de l”utilisateur root :</p>
+<p><img alt="Mot de passe root" src="../_images/disable_root.PNG" /></p>
+</div>
 <div class="section" id="contre-mesures-bruteforce">
 <h3>Contre mesures bruteforce<a class="headerlink" href="#contre-mesures-bruteforce" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Limitons le nombre de tentative d”authentification :</p>
 <p><img alt="Mot de passe root" src="../_images/bruteforce_pass_sshd.PNG" /></p>
 <p><img alt="Mot de passe root" src="../_images/bruteforce_pass_login.PNG" /></p>
 </div>
 <div class="section" id="politiques-de-password">
 <h3>Politiques de password<a class="headerlink" href="#politiques-de-password" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Définissons une politique de password pour forcer les utilisateurs à respecter les bonnes pratiques de sécurité</p>
 <p><img alt="Mot de passe root" src="../_images/password_policy.PNG" /></p>
+<p>Testons cette politique :</p>
 <p><img alt="Mot de passe root" src="../_images/password_policy_poc.PNG" /></p>
+<p>Définissons enfin une politique de stockage des mots de passe forte :</p>
+<p><img alt="Stockage password" src="../_images/common-password.PNG" /></p>
+</div>
+<div class="section" id="double-authentification">
+<h3>Double authentification<a class="headerlink" href="#double-authentification" title="Lien permanent vers ce titre">¶</a></h3>
+<p><img alt="Installation google-auth" src="../_images/1_install_google_auth.PNG" /></p>
+<p><img alt="Configure google auth" src="../_images/2_configure_google_auth.PNG" /></p>
+<p><img alt="Configure PAM" src="../_images/3_configure_pam.PNG" /></p>
+<p><img alt="Configure sshd" src="../_images/3_configure_sshd.PNG" /></p>
+<p><img alt="Verification" src="../_images/4_verification.PNG" /></p>
 </div>
 </div>
 <div class="section" id="commentaires">
@@ -88,7 +122,7 @@
 
 
 <h3>Navigation</h3>
-<p class="caption"><span class="caption-text">Contents:</span></p>
+<p class="caption"><span class="caption-text">Applications des recommendations de l'ANSSI :</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Procédure d”installation</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Hardening PAM</a><ul>
@@ -98,6 +132,10 @@
 <li class="toctree-l2"><a class="reference internal" href="#commentaires">Commentaires</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="iptables_entrant.html">Parefeu local</a></li>
+<li class="toctree-l1"><a class="reference internal" href="application_correctifs.html">Applications des correctifs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hardening_openssh.html">Hardening de OpenSSH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="confinement_droits_sudo.html">Confinement des droits sudo</a></li>
 </ul>
 
 <div class="relations">
@@ -105,6 +143,7 @@
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
       <li>Previous: <a href="installation.html" title="Chapitre précédent">Procédure d”installation</a></li>
+      <li>Next: <a href="iptables_entrant.html" title="Chapitre suivant">Parefeu local</a></li>
   </ul></li>
 </ul>
 </div>

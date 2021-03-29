@@ -7,9 +7,8 @@
 
 ## Classification
 
-* Niveau ANSSI : minimal
-* Authentification
-* Gestion des comptes
+* Niveau ANSSI : intermédiaire
+* Gestion des flux
 
 
 ## Sources

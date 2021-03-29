@@ -3,16 +3,27 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to TD Sécurité Linux's documentation!
+1ere phase
 =============================================
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Applications des recommendations de l'ANSSI :
 
    src/installation.md
    src/hardening_PAM.md
-   src/iptables_sortant
+   src/iptables_entrant
+   src/application_correctifs
+   src/hardening_openssh
+   src/confinement_droits_sudo
+
+
+2nd phase
+=============================================
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Audits de sécurité :
 
 
 
