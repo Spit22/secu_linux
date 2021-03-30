@@ -1,0 +1,271 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Rsyslog &mdash; Documentation TD Sécurité Linux 1.0</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="next" title="Auditd" href="auditd.html" />
+    <link rel="prev" title="Désactivation des Magic keys" href="desactivation_magickeys.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> TD Sécurité Linux
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Niveau minimal ANSSI</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Procédure d”installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hardening_PAM.html">Hardening PAM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="application_correctifs.html">Applications des correctifs</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Niveau intermédiaire ANSSI</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="parefeu_local.html">Parefeu local</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hardening_openssh.html">Hardening de OpenSSH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="confinement_droits_sudo.html">Confinement des droits sudo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hardening_grub.html">Hardening de Grub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="desactivation_magickeys.html">Désactivation des Magic keys</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Rsyslog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#classification">Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sources">Sources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#procedures">Procédures</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#generation-des-cles">Génération des clés</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#commentaires">Commentaires</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Niveau renforcé ANSSI</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="auditd.html">Auditd</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Audits de sécurité</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="audit_lynis.html">Audit Lynis</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">TD Sécurité Linux</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Rsyslog</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/src/rsyslog.md.txt" rel="nofollow"> Afficher la source de la page</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="rsyslog">
+<h1>Rsyslog<a class="headerlink" href="#rsyslog" title="Lien permanent vers ce titre">¶</a></h1>
+<div class="section" id="classification">
+<h2>Classification<a class="headerlink" href="#classification" title="Lien permanent vers ce titre">¶</a></h2>
+<ul class="simple">
+<li><p>Niveau ANSSI : renforcé</p></li>
+<li><p>Journalisation</p></li>
+</ul>
+</div>
+<div class="section" id="sources">
+<h2>Sources<a class="headerlink" href="#sources" title="Lien permanent vers ce titre">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.ssi.gouv.fr/uploads/2016/01/linux_configuration-fr-v1.2.pdf">ANSSI</a></p></li>
+<li><p><a class="reference external" href="https://www.golinuxcloud.com/secure-remote-logging-rsyslog-tls-certificate/">golinuxcloud.com</a></p></li>
+</ul>
+</div>
+<div class="section" id="procedures">
+<h2>Procédures<a class="headerlink" href="#procedures" title="Lien permanent vers ce titre">¶</a></h2>
+<p>On veut que les flux syslog soient chiffrés :</p>
+<div class="section" id="generation-des-cles">
+<h3>Génération des clés<a class="headerlink" href="#generation-des-cles" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Générons les clés privés pour le client et le serveur :</p>
+<p><img alt="../_images/key-generation.PNG" src="../_images/key-generation.PNG" /></p>
+<p><img alt="../_images/generate_serv_key.PNG" src="../_images/generate_serv_key.PNG" /></p>
+<p>Générons ensuite une requête de certificat pour le serveur :</p>
+<p><img alt="../_images/generate_serv_certificates.PNG" src="../_images/generate_serv_certificates.PNG" /></p>
+<p>On créer enfin un certificat autosigné pour le client :</p>
+<p><img alt="../_images/generate_self-signed_certificates.PNG" src="../_images/generate_self-signed_certificates.PNG" /></p>
+<p>Et un certificat signé avec la clé du client pour le serveur :</p>
+<p><img alt="../_images/generate_signed_serv1_certificates.PNG" src="../_images/generate_signed_serv1_certificates.PNG" /></p>
+</div>
+</div>
+<div class="section" id="commentaires">
+<h2>Commentaires<a class="headerlink" href="#commentaires" title="Lien permanent vers ce titre">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="auditd.html" class="btn btn-neutral float-right" title="Auditd" accesskey="n" rel="next">Suivant <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="desactivation_magickeys.html" class="btn btn-neutral float-left" title="Désactivation des Magic keys" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Bastien SECHER - Olivier CUREAU - Mael FANJOUX.
+
+    </p>
+  </div>
+    
+    
+    
+    Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -14,6 +14,7 @@
    src/hardening_PAM
    src/application_correctifs
 
+
 =============================================
 
 .. toctree::
@@ -25,6 +26,8 @@
    src/confinement_droits_sudo
    src/hardening_grub
    src/desactivation_magickeys
+   src/rsyslog
+
 
 =============================================
 
@@ -32,8 +35,7 @@
    :maxdepth: 2
    :caption: Niveau renforcé ANSSI
 
-   
-
+   src/auditd
 
 
 =============================================
@@ -43,6 +45,7 @@
    :caption: Audits de sécurité
 
    src/audit_lynis
+
 
 
 
