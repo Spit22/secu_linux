@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hardening de OpenSSH &#8212; Documentation TD Sécurité Linux 1.0</title>
+    <title>Parefeu local &#8212; Documentation TD Sécurité Linux 1.0</title>
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -15,8 +15,8 @@
     <script src="../_static/translations.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Recherche" href="../search.html" />
-    <link rel="next" title="Confinement des droits sudo" href="confinement_droits_sudo.html" />
-    <link rel="prev" title="Applications des correctifs" href="application_correctifs.html" />
+    <link rel="next" title="Applications des correctifs" href="application_correctifs.html" />
+    <link rel="prev" title="Hardening PAM" href="hardening_PAM.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -33,44 +33,65 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="hardening-de-openssh">
-<h1>Hardening de OpenSSH<a class="headerlink" href="#hardening-de-openssh" title="Lien permanent vers ce titre">¶</a></h1>
-<p>Le service OpenSSH est le point d”entrée principal de notre système Linux. Il est donc primordial de durcir ce service.</p>
+  <div class="section" id="parefeu-local">
+<h1>Parefeu local<a class="headerlink" href="#parefeu-local" title="Lien permanent vers ce titre">¶</a></h1>
+<p>-classification (niveau ANSSI,type de mesure,  …)
+-sources
+-procédures
+-commentaires (résultat, mesure écartée, conservée, adaptée,…)</p>
 <div class="section" id="classification">
 <h2>Classification<a class="headerlink" href="#classification" title="Lien permanent vers ce titre">¶</a></h2>
 <ul class="simple">
 <li><p>Niveau ANSSI : intermédiaire</p></li>
-<li><p>Authentification</p></li>
-<li><p>Accès à distance</p></li>
+<li><p>Gestion des flux</p></li>
 </ul>
 </div>
 <div class="section" id="sources">
 <h2>Sources<a class="headerlink" href="#sources" title="Lien permanent vers ce titre">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://www.ssi.gouv.fr/uploads/2016/01/linux_configuration-fr-v1.2.pdf">ANSSI</a></p></li>
-<li><p><a class="reference external" href="https://lecrabeinfo.net/se-connecter-en-ssh-par-echange-de-cles-ssh.html">LeCrabeInfo</a></p></li>
 </ul>
 </div>
 <div class="section" id="procedures">
 <h2>Procédures<a class="headerlink" href="#procedures" title="Lien permanent vers ce titre">¶</a></h2>
-<div class="section" id="authentification-avec-cle-ssh">
-<h3>Authentification avec clé SSH<a class="headerlink" href="#authentification-avec-cle-ssh" title="Lien permanent vers ce titre">¶</a></h3>
-<p>L”authentification s”effectuera désormais avec une clé SSH :</p>
-<p><img alt="Generer la clé" src="../_images/1_generate_ssh_key_for_auth.PNG" /></p>
-<p><img alt="Déployer la clé" src="../_images/2_deploy_key_on_remote_server.PNG" /></p>
-<p><img alt="Tester la clé" src="../_images/3_test_key_is_accepted.PNG" /></p>
-</div>
-<div class="section" id="configuration-de-sshd">
-<h3>Configuration de sshd<a class="headerlink" href="#configuration-de-sshd" title="Lien permanent vers ce titre">¶</a></h3>
-<p>La configuration du service ssh est également durcie :</p>
+<p>Voici une première version du script iptables que nous allons appliquer sur le serveur. Ses caractéristiques sont :</p>
 <ul class="simple">
-<li><p>le port d”écoute du service a été modifié (le parefeu local a été modifié en conséquence)</p></li>
-<li><p>l”authentification en tant qu”utilisateur root a été interdite</p></li>
-<li><p>l”authentification par mot de passe a été interdite</p></li>
-<li><p>les mécanismes de chiffrement utilisées sont robustes</p></li>
+<li><p>Les flux entrants sont <strong>bloqués</strong> par défaut</p></li>
+<li><p>Les flux sortants sont <strong>autorisés</strong> par défaut</p></li>
+<li><p>Les flux entrants sur le port SSH sont <strong>autorisés</strong></p></li>
+<li><p>Les nouvelles connexions SSH sont <strong>journalisées</strong></p></li>
 </ul>
-<p><img alt="Configuration sshd partie1" src="../_images/4_configuration_sshd_config_part1.PNG" /></p>
-<p><img alt="Configuration sshd partie2" src="../_images/4_configuration_sshd_config_part2.PNG" /></p>
+<p><img alt="Script firewall" src="../_images/script_firewall.PNG" /></p>
+<p>On restreint les droits sur ce script :</p>
+<p><img alt="Droit firewall" src="../_images/droits_script_firewall.PNG" /></p>
+<p>On redirige les journaux généré par le parefeu vers le fichier <em>/var/log/iptables.log</em> :</p>
+<p><img alt="Configuration Rsyslog" src="../_images/configuration_logging.PNG" /></p>
+<div class="section" id="mise-en-place-du-parefeu-local">
+<h3>Mise en place du parefeu local<a class="headerlink" href="#mise-en-place-du-parefeu-local" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Appliquons maintenant les politiques définies dans le script :</p>
+<p><img alt="Execution firewall" src="../_images/execution_firewall.PNG" /></p>
+<p>Faisons en sorte que ces politiques soient persitantes :</p>
+<p><img alt="Execution automatique du firewall" src="../_images/execution_auto_fw.PNG" /></p>
+</div>
+<div class="section" id="test-du-parefeu-local">
+<h3>Test du parefeu local<a class="headerlink" href="#test-du-parefeu-local" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Testons nos politiques de parefeu :</p>
+<p><img alt="Test1" src="../_images/test_part1.PNG" /></p>
+<p><img alt="Test2" src="../_images/test_part2.PNG" /></p>
+</div>
+<div class="section" id="alternative-nftable">
+<h3>Alternative : nftable<a class="headerlink" href="#alternative-nftable" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Sauvergardons nos règles iptables appliquées jusqu”à maintenant :</p>
+<p><img alt="Sauvergarde iptables" src="../_images/1_save_current_iptables_rules.PNG" /></p>
+<p><img alt="Convertion" src="../_images/2_convert_iptable_to_nftable.PNG" /></p>
+<p><img alt="Sauvergarde iptables" src="../_images/3_execute_nftable_rules.PNG" /></p>
+<p><img alt="Sauvergarde iptables" src="../_images/4_save_as_firewall.nft.PNG" /></p>
+</div>
+<div class="section" id="amelioration-du-parefeu-local">
+<h3>Amélioration du parefeu local<a class="headerlink" href="#amelioration-du-parefeu-local" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Ajoutons des règles de filtrage sur le traffic sortant :</p>
+<p><img alt="Règles sortant" src="../_images/1_output_rules.PNG" /></p>
+<p><img alt="Règles sortant 2" src="../_images/2_output_rules.PNG" /></p>
 </div>
 </div>
 <div class="section" id="commentaires">
@@ -99,24 +120,25 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Procédure d”installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hardening_PAM.html">Hardening PAM</a></li>
-<li class="toctree-l1"><a class="reference internal" href="iptables_entrant.html">Parefeu local</a></li>
-<li class="toctree-l1"><a class="reference internal" href="application_correctifs.html">Applications des correctifs</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Hardening de OpenSSH</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Parefeu local</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#classification">Classification</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#sources">Sources</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#procedures">Procédures</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#commentaires">Commentaires</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="application_correctifs.html">Applications des correctifs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hardening_openssh.html">Hardening de OpenSSH</a></li>
 <li class="toctree-l1"><a class="reference internal" href="confinement_droits_sudo.html">Confinement des droits sudo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hardening_grub.html">Hardening de Grub</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="application_correctifs.html" title="Chapitre précédent">Applications des correctifs</a></li>
-      <li>Next: <a href="confinement_droits_sudo.html" title="Chapitre suivant">Confinement des droits sudo</a></li>
+      <li>Previous: <a href="hardening_PAM.html" title="Chapitre précédent">Hardening PAM</a></li>
+      <li>Next: <a href="application_correctifs.html" title="Chapitre suivant">Applications des correctifs</a></li>
   </ul></li>
 </ul>
 </div>
@@ -150,7 +172,7 @@
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
-      <a href="../_sources/src/hardening_openssh.md.txt"
+      <a href="../_sources/src/parefeu_local.md.txt"
           rel="nofollow">Page source</a>
     </div>
 

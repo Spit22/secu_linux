@@ -10,12 +10,13 @@
    :maxdepth: 2
    :caption: Applications des recommendations de l'ANSSI :
 
-   src/installation.md
-   src/hardening_PAM.md
-   src/iptables_entrant
+   src/installation
+   src/hardening_PAM
+   src/parefeu_local
    src/application_correctifs
    src/hardening_openssh
    src/confinement_droits_sudo
+   src/hardening_grub
 
 
 2nd phase

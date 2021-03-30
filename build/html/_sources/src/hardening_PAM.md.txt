@@ -1,9 +1,6 @@
 # Hardening PAM
 
--classification (niveau ANSSI,type de mesure,  ...)
-    -sources
-    -procédures
-    -commentaires (résultat, mesure écartée, conservée, adaptée,...)
+PAM est un élément central de notre système Linux, gérant les authentifications des utilisateurs. Il est donc primordial de le durcir.
 
 ## Classification
 
@@ -11,7 +8,6 @@
 * Authentification
 * Gestion des comptes
 * Double authentification
-
 
 ## Sources
 
@@ -49,8 +45,7 @@ Désactivons enfin le shell de l'utilisateur root :
 
 ![Mot de passe root](img/PAM/disable_root.PNG)
 
-
-### Contre mesures bruteforce
+### Contres mesures bruteforce
 
 Limitons le nombre de tentative d'authentification :
 
@@ -74,13 +69,19 @@ Définissons enfin une politique de stockage des mots de passe forte :
 
 ### Double authentification
 
+Utilisons Google authentificator pour implémenter de la double authentification dans le PAM de notre système Linux :
+
 ![Installation google-auth](img/PAM_2fa/1_install_google_auth.PNG)
 
 ![Configure google auth](img/PAM_2fa/2_configure_google_auth.PNG)
 
+Configurons PAM et sshd pour qu'il utilise Google authentificator :
+
 ![Configure PAM](img/PAM_2fa/3_configure_pam.PNG)
 
 ![Configure sshd](img/PAM_2fa/3_configure_sshd.PNG)
+
+Vérifions que le mécanisme est fonctionel :
 
 ![Verification](img/PAM_2fa/4_verification.PNG)
 

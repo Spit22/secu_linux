@@ -52,5 +52,32 @@ Testons nos politiques de parefeu :
 
 ![Test2](img/iptables_entrant/test_part2.PNG)
 
+### Alternative : nftable
+
+Sauvergardons nos règles iptables appliquées jusqu'à maintenant :
+
+![Sauvergarde iptables](img/convert_iptable2nftable/1_save_current_iptables_rules.PNG)
+
+
+
+![Convertion](img/convert_iptable2nftable/2_convert_iptable_to_nftable.PNG)
+
+
+
+![Sauvergarde iptables](img/convert_iptable2nftable/3_execute_nftable_rules.PNG)
+
+
+
+![Sauvergarde iptables](img/convert_iptable2nftable/4_save_as_firewall.nft.PNG)
+
+### Amélioration du parefeu local
+
+Ajoutons des règles de filtrage sur le traffic sortant :
+
+![Règles sortant](img/iptables_output/1_output_rules.PNG)
+
+![Règles sortant 2](img/iptables_output/2_output_rules.PNG)
+
+
 
 ## Commentaires

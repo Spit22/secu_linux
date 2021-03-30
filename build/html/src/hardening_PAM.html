@@ -35,10 +35,7 @@
             
   <div class="section" id="hardening-pam">
 <h1>Hardening PAM<a class="headerlink" href="#hardening-pam" title="Lien permanent vers ce titre">¶</a></h1>
-<p>-classification (niveau ANSSI,type de mesure,  …)
--sources
--procédures
--commentaires (résultat, mesure écartée, conservée, adaptée,…)</p>
+<p>PAM est un élément central de notre système Linux, gérant les authentifications des utilisateurs. Il est donc primordial de le durcir.</p>
 <div class="section" id="classification">
 <h2>Classification<a class="headerlink" href="#classification" title="Lien permanent vers ce titre">¶</a></h2>
 <ul class="simple">
@@ -76,8 +73,8 @@
 <p>Désactivons enfin le shell de l”utilisateur root :</p>
 <p><img alt="Mot de passe root" src="../_images/disable_root.PNG" /></p>
 </div>
-<div class="section" id="contre-mesures-bruteforce">
-<h3>Contre mesures bruteforce<a class="headerlink" href="#contre-mesures-bruteforce" title="Lien permanent vers ce titre">¶</a></h3>
+<div class="section" id="contres-mesures-bruteforce">
+<h3>Contres mesures bruteforce<a class="headerlink" href="#contres-mesures-bruteforce" title="Lien permanent vers ce titre">¶</a></h3>
 <p>Limitons le nombre de tentative d”authentification :</p>
 <p><img alt="Mot de passe root" src="../_images/bruteforce_pass_sshd.PNG" /></p>
 <p><img alt="Mot de passe root" src="../_images/bruteforce_pass_login.PNG" /></p>
@@ -93,10 +90,13 @@
 </div>
 <div class="section" id="double-authentification">
 <h3>Double authentification<a class="headerlink" href="#double-authentification" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Utilisons Google authentificator pour implémenter de la double authentification dans le PAM de notre système Linux :</p>
 <p><img alt="Installation google-auth" src="../_images/1_install_google_auth.PNG" /></p>
 <p><img alt="Configure google auth" src="../_images/2_configure_google_auth.PNG" /></p>
+<p>Configurons PAM et sshd pour qu”il utilise Google authentificator :</p>
 <p><img alt="Configure PAM" src="../_images/3_configure_pam.PNG" /></p>
 <p><img alt="Configure sshd" src="../_images/3_configure_sshd.PNG" /></p>
+<p>Vérifions que le mécanisme est fonctionel :</p>
 <p><img alt="Verification" src="../_images/4_verification.PNG" /></p>
 </div>
 </div>
