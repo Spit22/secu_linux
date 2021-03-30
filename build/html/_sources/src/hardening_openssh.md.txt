@@ -20,11 +20,11 @@ Le service OpenSSH est le point d'entrée principal de notre système Linux. Il 
 
 L'authentification s'effectuera désormais avec une clé SSH :
 
-![Generer la clé](img/hardening_ssh/1_generate_ssh_key_for_auth.PNG)
+![](img/hardening_ssh/1_generate_ssh_key_for_auth.PNG)
 
-![Déployer la clé](img/hardening_ssh/2_deploy_key_on_remote_server.PNG)
+![](img/hardening_ssh/2_deploy_key_on_remote_server.PNG)
 
-![Tester la clé](img/hardening_ssh/3_test_key_is_accepted.PNG)
+![](img/hardening_ssh/3_test_key_is_accepted.PNG)
 
 ### Configuration de sshd
 
@@ -35,9 +35,9 @@ La configuration du service ssh est également durcie :
 * l'authentification par mot de passe a été interdite
 * les mécanismes de chiffrement utilisées sont robustes
 
-![Configuration sshd partie1](img/hardening_ssh/4_configuration_sshd_config_part1.PNG)
+![](img/hardening_ssh/4_configuration_sshd_config_part1.PNG)
 
-![Configuration sshd partie2](img/hardening_ssh/4_configuration_sshd_config_part2.PNG)
+![](img/hardening_ssh/4_configuration_sshd_config_part2.PNG)
 
 
 

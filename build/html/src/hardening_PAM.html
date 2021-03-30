@@ -85,7 +85,7 @@
               
             
             
-              <p class="caption"><span class="caption-text">Applications des recommendations de l'ANSSI :</span></p>
+              <p class="caption"><span class="caption-text">Recommandations minimales ANSSI :</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Procédure d”installation</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Hardening PAM</a><ul>
@@ -195,7 +195,7 @@
 <div class="section" id="procedures">
 <h2>Procédures<a class="headerlink" href="#procedures" title="Lien permanent vers ce titre">¶</a></h2>
 <p>Commençons par installer la librairie <em>libpam</em> :</p>
-<p><img alt="Mot de passe root" src="../_images/install_libpam.PNG" /></p>
+<p><img alt="../_images/install_libpam.PNG" src="../_images/install_libpam.PNG" /></p>
 <div class="section" id="desactivation-du-compte-root">
 <h3>Désactivation du compte root<a class="headerlink" href="#desactivation-du-compte-root" title="Lien permanent vers ce titre">¶</a></h3>
 <p>Le but de cette étapes est de bloquer l”accès au compte root. Pour cela, nous allons utiliser deux mécanismes :</p>
@@ -205,39 +205,39 @@
 </ul>
 <p>Le groupe <em>wheel</em> est l”équivalent du groupe <em>sudo</em> chez RedHat.</p>
 <p>Commençons par créer le groupe <em>wheel</em> :</p>
-<p><img alt="Mot de passe root" src="../_images/group_wheel.PNG" /></p>
+<p><img alt="../_images/group_wheel.PNG" src="../_images/group_wheel.PNG" /></p>
 <p>Bloquons ensuite l”accès au compte root aux membres du groupe <em>wheel</em> :</p>
-<p><img alt="Mot de passe root" src="../_images/disable_root_wheel.PNG" /></p>
-<p><img alt="Mot de passe root" src="../_images/disable_root_wheel_2.PNG" /></p>
+<p><img alt="../_images/disable_root_wheel.PNG" src="../_images/disable_root_wheel.PNG" /></p>
+<p><img alt="../_images/disable_root_wheel_2.PNG" src="../_images/disable_root_wheel_2.PNG" /></p>
 <p>Pour que ce mécanisme fonctionne, il est impératif d”ajouter les superutilisateurs (membres du groupe <em>sudo</em>) au groupe <em>wheel</em>.</p>
 <p>Désactivons enfin le shell de l”utilisateur root :</p>
-<p><img alt="Mot de passe root" src="../_images/disable_root.PNG" /></p>
+<p><img alt="../_images/disable_root.PNG" src="../_images/disable_root.PNG" /></p>
 </div>
 <div class="section" id="contres-mesures-bruteforce">
 <h3>Contres mesures bruteforce<a class="headerlink" href="#contres-mesures-bruteforce" title="Lien permanent vers ce titre">¶</a></h3>
 <p>Limitons le nombre de tentative d”authentification :</p>
-<p><img alt="Mot de passe root" src="../_images/bruteforce_pass_sshd.PNG" /></p>
-<p><img alt="Mot de passe root" src="../_images/bruteforce_pass_login.PNG" /></p>
+<p><img alt="../_images/bruteforce_pass_sshd.PNG" src="../_images/bruteforce_pass_sshd.PNG" /></p>
+<p><img alt="../_images/bruteforce_pass_login.PNG" src="../_images/bruteforce_pass_login.PNG" /></p>
 </div>
 <div class="section" id="politiques-de-password">
 <h3>Politiques de password<a class="headerlink" href="#politiques-de-password" title="Lien permanent vers ce titre">¶</a></h3>
 <p>Définissons une politique de password pour forcer les utilisateurs à respecter les bonnes pratiques de sécurité</p>
-<p><img alt="Mot de passe root" src="../_images/password_policy.PNG" /></p>
+<p><img alt="../_images/password_policy.PNG" src="../_images/password_policy.PNG" /></p>
 <p>Testons cette politique :</p>
-<p><img alt="Mot de passe root" src="../_images/password_policy_poc.PNG" /></p>
+<p><img alt="../_images/password_policy_poc.PNG" src="../_images/password_policy_poc.PNG" /></p>
 <p>Définissons enfin une politique de stockage des mots de passe forte :</p>
-<p><img alt="Stockage password" src="../_images/common-password.PNG" /></p>
+<p><img alt="../_images/common-password.PNG" src="../_images/common-password.PNG" /></p>
 </div>
 <div class="section" id="double-authentification">
 <h3>Double authentification<a class="headerlink" href="#double-authentification" title="Lien permanent vers ce titre">¶</a></h3>
 <p>Utilisons Google authentificator pour implémenter de la double authentification dans le PAM de notre système Linux :</p>
-<p><img alt="Installation google-auth" src="../_images/1_install_google_auth.PNG" /></p>
-<p><img alt="Configure google auth" src="../_images/2_configure_google_auth.PNG" /></p>
+<p><img alt="../_images/1_install_google_auth.PNG" src="../_images/1_install_google_auth.PNG" /></p>
+<p><img alt="../_images/2_configure_google_auth.PNG" src="../_images/2_configure_google_auth.PNG" /></p>
 <p>Configurons PAM et sshd pour qu”il utilise Google authentificator :</p>
-<p><img alt="Configure PAM" src="../_images/3_configure_pam.PNG" /></p>
-<p><img alt="Configure sshd" src="../_images/3_configure_sshd.PNG" /></p>
+<p><img alt="../_images/3_configure_pam.PNG" src="../_images/3_configure_pam.PNG" /></p>
+<p><img alt="../_images/3_configure_sshd.PNG" src="../_images/3_configure_sshd.PNG" /></p>
 <p>Vérifions que le mécanisme est fonctionel :</p>
-<p><img alt="Verification" src="../_images/4_verification.PNG" /></p>
+<p><img alt="../_images/4_verification.PNG" src="../_images/4_verification.PNG" /></p>
 </div>
 </div>
 <div class="section" id="commentaires">

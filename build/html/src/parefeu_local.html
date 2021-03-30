@@ -85,7 +85,7 @@
               
             
             
-              <p class="caption"><span class="caption-text">Applications des recommendations de l'ANSSI :</span></p>
+              <p class="caption"><span class="caption-text">Recommandations minimales ANSSI :</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Procédure d”installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hardening_PAM.html">Hardening PAM</a></li>
@@ -201,37 +201,37 @@
 <li><p>Les flux entrants sur le port SSH sont <strong>autorisés</strong></p></li>
 <li><p>Les nouvelles connexions SSH sont <strong>journalisées</strong></p></li>
 </ul>
-<p><img alt="Script firewall" src="../_images/script_firewall.PNG" /></p>
+<p><img alt="../_images/script_firewall.PNG" src="../_images/script_firewall.PNG" /></p>
 <p>On restreint les droits sur ce script :</p>
-<p><img alt="Droit firewall" src="../_images/droits_script_firewall.PNG" /></p>
+<p><img alt="../_images/droits_script_firewall.PNG" src="../_images/droits_script_firewall.PNG" /></p>
 <p>On redirige les journaux généré par le parefeu vers le fichier <em>/var/log/iptables.log</em> :</p>
-<p><img alt="Configuration Rsyslog" src="../_images/configuration_logging.PNG" /></p>
+<p><img alt="../_images/configuration_logging.PNG" src="../_images/configuration_logging.PNG" /></p>
 <div class="section" id="mise-en-place-du-parefeu-local">
 <h3>Mise en place du parefeu local<a class="headerlink" href="#mise-en-place-du-parefeu-local" title="Lien permanent vers ce titre">¶</a></h3>
 <p>Appliquons maintenant les politiques définies dans le script :</p>
-<p><img alt="Execution firewall" src="../_images/execution_firewall.PNG" /></p>
+<p><img alt="../_images/execution_firewall.PNG" src="../_images/execution_firewall.PNG" /></p>
 <p>Faisons en sorte que ces politiques soient persitantes :</p>
-<p><img alt="Execution automatique du firewall" src="../_images/execution_auto_fw.PNG" /></p>
+<p><img alt="../_images/execution_auto_fw.PNG" src="../_images/execution_auto_fw.PNG" /></p>
 </div>
 <div class="section" id="test-du-parefeu-local">
 <h3>Test du parefeu local<a class="headerlink" href="#test-du-parefeu-local" title="Lien permanent vers ce titre">¶</a></h3>
 <p>Testons nos politiques de parefeu :</p>
-<p><img alt="Test1" src="../_images/test_part1.PNG" /></p>
-<p><img alt="Test2" src="../_images/test_part2.PNG" /></p>
+<p><img alt="../_images/test_part1.PNG" src="../_images/test_part1.PNG" /></p>
+<p><img alt="../_images/test_part2.PNG" src="../_images/test_part2.PNG" /></p>
 </div>
 <div class="section" id="alternative-nftable">
 <h3>Alternative : nftable<a class="headerlink" href="#alternative-nftable" title="Lien permanent vers ce titre">¶</a></h3>
 <p>Sauvergardons nos règles iptables appliquées jusqu”à maintenant :</p>
-<p><img alt="Sauvergarde iptables" src="../_images/1_save_current_iptables_rules.PNG" /></p>
-<p><img alt="Convertion" src="../_images/2_convert_iptable_to_nftable.PNG" /></p>
-<p><img alt="Sauvergarde iptables" src="../_images/3_execute_nftable_rules.PNG" /></p>
-<p><img alt="Sauvergarde iptables" src="../_images/4_save_as_firewall.nft.PNG" /></p>
+<p><img alt="../_images/1_save_current_iptables_rules.PNG" src="../_images/1_save_current_iptables_rules.PNG" /></p>
+<p><img alt="../_images/2_convert_iptable_to_nftable.PNG" src="../_images/2_convert_iptable_to_nftable.PNG" /></p>
+<p><img alt="../_images/3_execute_nftable_rules.PNG" src="../_images/3_execute_nftable_rules.PNG" /></p>
+<p><img alt="../_images/4_save_as_firewall.nft.PNG" src="../_images/4_save_as_firewall.nft.PNG" /></p>
 </div>
 <div class="section" id="amelioration-du-parefeu-local">
 <h3>Amélioration du parefeu local<a class="headerlink" href="#amelioration-du-parefeu-local" title="Lien permanent vers ce titre">¶</a></h3>
 <p>Ajoutons des règles de filtrage sur le traffic sortant :</p>
-<p><img alt="Règles sortant" src="../_images/1_output_rules.PNG" /></p>
-<p><img alt="Règles sortant 2" src="../_images/2_output_rules.PNG" /></p>
+<p><img alt="../_images/1_output_rules.PNG" src="../_images/1_output_rules.PNG" /></p>
+<p><img alt="../_images/2_output_rules.PNG" src="../_images/2_output_rules.PNG" /></p>
 </div>
 </div>
 <div class="section" id="commentaires">

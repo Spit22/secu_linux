@@ -1,0 +1,363 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Audit Lynis &mdash; Documentation TD Sécurité Linux 1.0</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="prev" title="Hardening de Grub" href="hardening_grub.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> TD Sécurité Linux
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Recommandations minimales ANSSI :</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Procédure d”installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hardening_PAM.html">Hardening PAM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parefeu_local.html">Parefeu local</a></li>
+<li class="toctree-l1"><a class="reference internal" href="application_correctifs.html">Applications des correctifs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hardening_openssh.html">Hardening de OpenSSH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="confinement_droits_sudo.html">Confinement des droits sudo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hardening_grub.html">Hardening de Grub</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Audits de sécurité :</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Audit Lynis</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">TD Sécurité Linux</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Audit Lynis</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/src/audit_lynis.md.txt" rel="nofollow"> Afficher la source de la page</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="audit-lynis">
+<h1>Audit Lynis<a class="headerlink" href="#audit-lynis" title="Lien permanent vers ce titre">¶</a></h1>
+<p>“””
+CVE-2016-1585 apparmor (low urgency)
+CVE-2019-17544 aspell (low urgency)
+CVE-2019-20433 aspell
+CVE-2021-26720 avahi-autoipd
+CVE-2018-10910 bluetooth (low urgency)
+CVE-2020-27153 bluetooth
+CVE-2018-10910 bluez (low urgency)
+CVE-2020-27153 bluez
+CVE-2021-28831 busybox
+CVE-2016-2781 coreutils (low urgency)
+CVE-2019-14866 cpio (low urgency)
+CVE-2019-14855 dirmngr (low urgency)
+CVE-2018-12886 gcc-8-base
+CVE-2019-15847 gcc-8-base
+CVE-2019-14855 gnupg (low urgency)
+CVE-2019-14855 gnupg-l10n (low urgency)
+CVE-2019-14855 gnupg-utils (low urgency)
+CVE-2019-14855 gpg (low urgency)
+CVE-2019-14855 gpg-agent (low urgency)
+CVE-2019-14855 gpg-wks-client (low urgency)
+CVE-2019-14855 gpg-wks-server (low urgency)
+CVE-2019-14855 gpgconf (low urgency)
+CVE-2019-14855 gpgsm (low urgency)
+CVE-2019-14855 gpgv (low urgency)
+CVE-2016-1585 libapparmor1 (low urgency)
+CVE-2019-17544 libaspell15 (low urgency)
+CVE-2019-20433 libaspell15
+CVE-2019-20367 libbsd0
+CVE-2016-10228 libc-bin (low urgency)
+CVE-2019-25013 libc-bin
+CVE-2020-10029 libc-bin
+CVE-2020-1751 libc-bin
+CVE-2020-1752 libc-bin
+CVE-2020-27618 libc-bin
+CVE-2020-6096 libc-bin (low urgency)
+CVE-2021-27645 libc-bin
+CVE-2021-3326 libc-bin
+CVE-2016-10228 libc-l10n (low urgency)
+CVE-2019-25013 libc-l10n
+CVE-2020-10029 libc-l10n
+CVE-2020-1751 libc-l10n
+CVE-2020-1752 libc-l10n
+CVE-2020-27618 libc-l10n
+CVE-2020-6096 libc-l10n (low urgency)
+CVE-2021-27645 libc-l10n
+CVE-2021-3326 libc-l10n
+CVE-2016-10228 libc6 (low urgency)
+CVE-2019-25013 libc6
+CVE-2020-10029 libc6
+CVE-2020-1751 libc6
+CVE-2020-1752 libc6
+CVE-2020-27618 libc6
+CVE-2020-6096 libc6 (low urgency)
+CVE-2021-27645 libc6
+CVE-2021-3326 libc6
+CVE-2020-8177 libcurl3-gnutls
+CVE-2020-8231 libcurl3-gnutls
+CVE-2020-8284 libcurl3-gnutls
+CVE-2020-8285 libcurl3-gnutls
+CVE-2020-8286 libcurl3-gnutls
+CVE-2018-12886 libgcc1
+CVE-2019-15847 libgcc1
+CVE-2019-13627 libgcrypt20
+CVE-2021-27218 libglib2.0-0
+CVE-2021-27219 libglib2.0-0
+CVE-2021-28153 libglib2.0-0
+CVE-2021-27218 libglib2.0-data
+CVE-2021-27219 libglib2.0-data
+CVE-2021-28153 libglib2.0-data
+CVE-2019-12290 libidn2-0
+CVE-2019-17543 liblz4-1 (low urgency)
+CVE-2021-27928 libmariadb3
+CVE-2019-20454 libpcre2-8-0
+CVE-2020-14155 libpcre3
+CVE-2019-20907 libpython2.7 (low urgency)
+CVE-2020-8492 libpython2.7 (low urgency)
+CVE-2021-23336 libpython2.7
+CVE-2021-3177 libpython2.7
+CVE-2019-20907 libpython2.7-minimal (low urgency)
+CVE-2020-8492 libpython2.7-minimal (low urgency)
+CVE-2021-23336 libpython2.7-minimal
+CVE-2021-3177 libpython2.7-minimal
+CVE-2019-20907 libpython2.7-stdlib (low urgency)
+CVE-2020-8492 libpython2.7-stdlib (low urgency)
+CVE-2021-23336 libpython2.7-stdlib
+CVE-2021-3177 libpython2.7-stdlib
+CVE-2020-26116 libpython3.7-minimal
+CVE-2021-23336 libpython3.7-minimal
+CVE-2021-3177 libpython3.7-minimal
+CVE-2021-3426 libpython3.7-minimal
+CVE-2020-26116 libpython3.7-stdlib
+CVE-2021-23336 libpython3.7-stdlib
+CVE-2021-3177 libpython3.7-stdlib
+CVE-2021-3426 libpython3.7-stdlib
+CVE-2019-13115 libssh2-1
+CVE-2019-17498 libssh2-1 (low urgency)
+CVE-2018-12886 libstdc++6
+CVE-2019-15847 libstdc++6
+CVE-2016-9318 libxml2
+CVE-2017-16932 libxml2
+CVE-2016-10228 locales (low urgency)
+CVE-2019-25013 locales
+CVE-2020-10029 locales
+CVE-2020-1751 locales
+CVE-2020-1752 locales
+CVE-2020-27618 locales
+CVE-2020-6096 locales (low urgency)
+CVE-2021-27645 locales
+CVE-2021-3326 locales
+CVE-2018-7169 login (low urgency)
+CVE-2021-27928 mariadb-common
+CVE-2018-15919 openssh-client (low urgency)
+CVE-2018-15919 openssh-server (low urgency)
+CVE-2018-15919 openssh-sftp-server (low urgency)
+CVE-2018-7169 passwd (low urgency)
+CVE-2019-20907 python2.7 (low urgency)
+CVE-2020-8492 python2.7 (low urgency)
+CVE-2021-23336 python2.7
+CVE-2021-3177 python2.7
+CVE-2019-20907 python2.7-minimal (low urgency)
+CVE-2020-8492 python2.7-minimal (low urgency)
+CVE-2021-23336 python2.7-minimal
+CVE-2021-3177 python2.7-minimal
+CVE-2020-11078 python3-httplib2
+CVE-2021-21240 python3-httplib2
+CVE-2019-11236 python3-urllib3
+CVE-2020-26137 python3-urllib3
+CVE-2020-26116 python3.7
+CVE-2021-23336 python3.7
+CVE-2021-3177 python3.7
+CVE-2021-3426 python3.7
+CVE-2020-26116 python3.7-minimal
+CVE-2021-23336 python3.7-minimal
+CVE-2021-3177 python3.7-minimal
+CVE-2021-3426 python3.7-minimal
+CVE-2019-17041 rsyslog
+CVE-2019-17042 rsyslog
+CVE-2019-20807 vim-common
+CVE-2019-20807 vim-tiny
+CVE-2020-12695 wpasupplicant
+CVE-2021-0326 wpasupplicant
+CVE-2021-27803 wpasupplicant
+CVE-2019-20807 xxd
+“””</p>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="hardening_grub.html" class="btn btn-neutral float-left" title="Hardening de Grub" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Bastien SECHER - Olivier CUREAU - Mael FANJOUX.
+
+    </p>
+  </div>
+    
+    
+    
+    Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
