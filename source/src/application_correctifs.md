@@ -21,17 +21,17 @@ Nous allons mettre en place un mécanismes pour automatiser les mises à jour de
 
 ### Installation
 
-![Installation](img/application_correctif/installation.PNG)
+![](img/application_correctif/installation.PNG)
 
 ### Configuration
 
-![Configuration security only](img/application_correctif/maj_for_security_only.PNG)
+![](img/application_correctif/maj_for_security_only.PNG)
 
-![Configuration automatic reboot](img/application_correctif/disable_automatic_reboot.PNG)
+![](img/application_correctif/disable_automatic_reboot.PNG)
 
 ### PoC
 
-![Installation](img/application_correctif/maj_poc.PNG)
+![](img/application_correctif/maj_poc.PNG)
 
 
 ## Commentaires

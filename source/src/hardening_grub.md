@@ -21,18 +21,18 @@ Faisons en sorte qu'un mot de passe soit requis pour accéder au bootloader.
 
 Générons d'abord le mot de passe (protégé par [PBKDF2](https://en.wikipedia.org/wiki/PBKDF2)) :
 
-![Generer grub password](img/hardening_grub/1_generate_password.png)
+![](img/hardening_grub/1_generate_password.png)
 
 Modifions ensuite la configuration de grub (dans _/etc/grub.d/00-header_)
 
-![Configurer grub](img/hardening_grub/2_grub_conf_header.png)
+![](img/hardening_grub/2_grub_conf_header.png)
 
 Effectuons un update de grub :
 
-![Update grub](img/hardening_grub/3_grub_update.png)
+![](img/hardening_grub/3_grub_update.png)
 
 Vérifions qu'une authentification est bien requise pour accéder au bootloader :
 
-![Vérification](img/hardening_grub/4_verif.png)
+![](img/hardening_grub/4_verif.png)
 
 ## Commentaires
