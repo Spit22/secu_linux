@@ -39,7 +39,7 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Recherche" href="../search.html" />
-    <link rel="prev" title="Hardening de Grub" href="hardening_grub.html" /> 
+    <link rel="prev" title="Désactivation des Magic keys" href="desactivation_magickeys.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -84,17 +84,21 @@
               
             
             
-              <p class="caption"><span class="caption-text">Recommandations minimales ANSSI :</span></p>
+              <p class="caption"><span class="caption-text">Niveau minimal ANSSI</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Procédure d”installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hardening_PAM.html">Hardening PAM</a></li>
-<li class="toctree-l1"><a class="reference internal" href="parefeu_local.html">Parefeu local</a></li>
 <li class="toctree-l1"><a class="reference internal" href="application_correctifs.html">Applications des correctifs</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Niveau intermédiaire ANSSI</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="parefeu_local.html">Parefeu local</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hardening_openssh.html">Hardening de OpenSSH</a></li>
 <li class="toctree-l1"><a class="reference internal" href="confinement_droits_sudo.html">Confinement des droits sudo</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hardening_grub.html">Hardening de Grub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="desactivation_magickeys.html">Désactivation des Magic keys</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Audits de sécurité :</span></p>
+<p class="caption"><span class="caption-text">Audits de sécurité</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Audit Lynis</a></li>
 </ul>
@@ -166,151 +170,151 @@
             
   <div class="section" id="audit-lynis">
 <h1>Audit Lynis<a class="headerlink" href="#audit-lynis" title="Lien permanent vers ce titre">¶</a></h1>
-<p>“””
-CVE-2016-1585 apparmor (low urgency)
-CVE-2019-17544 aspell (low urgency)
-CVE-2019-20433 aspell
-CVE-2021-26720 avahi-autoipd
-CVE-2018-10910 bluetooth (low urgency)
-CVE-2020-27153 bluetooth
-CVE-2018-10910 bluez (low urgency)
-CVE-2020-27153 bluez
-CVE-2021-28831 busybox
-CVE-2016-2781 coreutils (low urgency)
-CVE-2019-14866 cpio (low urgency)
-CVE-2019-14855 dirmngr (low urgency)
-CVE-2018-12886 gcc-8-base
-CVE-2019-15847 gcc-8-base
-CVE-2019-14855 gnupg (low urgency)
-CVE-2019-14855 gnupg-l10n (low urgency)
-CVE-2019-14855 gnupg-utils (low urgency)
-CVE-2019-14855 gpg (low urgency)
-CVE-2019-14855 gpg-agent (low urgency)
-CVE-2019-14855 gpg-wks-client (low urgency)
-CVE-2019-14855 gpg-wks-server (low urgency)
-CVE-2019-14855 gpgconf (low urgency)
-CVE-2019-14855 gpgsm (low urgency)
-CVE-2019-14855 gpgv (low urgency)
-CVE-2016-1585 libapparmor1 (low urgency)
-CVE-2019-17544 libaspell15 (low urgency)
-CVE-2019-20433 libaspell15
-CVE-2019-20367 libbsd0
-CVE-2016-10228 libc-bin (low urgency)
-CVE-2019-25013 libc-bin
-CVE-2020-10029 libc-bin
-CVE-2020-1751 libc-bin
-CVE-2020-1752 libc-bin
-CVE-2020-27618 libc-bin
-CVE-2020-6096 libc-bin (low urgency)
-CVE-2021-27645 libc-bin
-CVE-2021-3326 libc-bin
-CVE-2016-10228 libc-l10n (low urgency)
-CVE-2019-25013 libc-l10n
-CVE-2020-10029 libc-l10n
-CVE-2020-1751 libc-l10n
-CVE-2020-1752 libc-l10n
-CVE-2020-27618 libc-l10n
-CVE-2020-6096 libc-l10n (low urgency)
-CVE-2021-27645 libc-l10n
-CVE-2021-3326 libc-l10n
-CVE-2016-10228 libc6 (low urgency)
-CVE-2019-25013 libc6
-CVE-2020-10029 libc6
-CVE-2020-1751 libc6
-CVE-2020-1752 libc6
-CVE-2020-27618 libc6
-CVE-2020-6096 libc6 (low urgency)
-CVE-2021-27645 libc6
-CVE-2021-3326 libc6
-CVE-2020-8177 libcurl3-gnutls
-CVE-2020-8231 libcurl3-gnutls
-CVE-2020-8284 libcurl3-gnutls
-CVE-2020-8285 libcurl3-gnutls
-CVE-2020-8286 libcurl3-gnutls
-CVE-2018-12886 libgcc1
-CVE-2019-15847 libgcc1
-CVE-2019-13627 libgcrypt20
-CVE-2021-27218 libglib2.0-0
-CVE-2021-27219 libglib2.0-0
-CVE-2021-28153 libglib2.0-0
-CVE-2021-27218 libglib2.0-data
-CVE-2021-27219 libglib2.0-data
-CVE-2021-28153 libglib2.0-data
-CVE-2019-12290 libidn2-0
-CVE-2019-17543 liblz4-1 (low urgency)
-CVE-2021-27928 libmariadb3
-CVE-2019-20454 libpcre2-8-0
-CVE-2020-14155 libpcre3
-CVE-2019-20907 libpython2.7 (low urgency)
-CVE-2020-8492 libpython2.7 (low urgency)
-CVE-2021-23336 libpython2.7
-CVE-2021-3177 libpython2.7
-CVE-2019-20907 libpython2.7-minimal (low urgency)
-CVE-2020-8492 libpython2.7-minimal (low urgency)
-CVE-2021-23336 libpython2.7-minimal
-CVE-2021-3177 libpython2.7-minimal
-CVE-2019-20907 libpython2.7-stdlib (low urgency)
-CVE-2020-8492 libpython2.7-stdlib (low urgency)
-CVE-2021-23336 libpython2.7-stdlib
-CVE-2021-3177 libpython2.7-stdlib
-CVE-2020-26116 libpython3.7-minimal
-CVE-2021-23336 libpython3.7-minimal
-CVE-2021-3177 libpython3.7-minimal
-CVE-2021-3426 libpython3.7-minimal
-CVE-2020-26116 libpython3.7-stdlib
-CVE-2021-23336 libpython3.7-stdlib
-CVE-2021-3177 libpython3.7-stdlib
-CVE-2021-3426 libpython3.7-stdlib
-CVE-2019-13115 libssh2-1
-CVE-2019-17498 libssh2-1 (low urgency)
-CVE-2018-12886 libstdc++6
-CVE-2019-15847 libstdc++6
-CVE-2016-9318 libxml2
-CVE-2017-16932 libxml2
-CVE-2016-10228 locales (low urgency)
-CVE-2019-25013 locales
-CVE-2020-10029 locales
-CVE-2020-1751 locales
-CVE-2020-1752 locales
-CVE-2020-27618 locales
-CVE-2020-6096 locales (low urgency)
-CVE-2021-27645 locales
-CVE-2021-3326 locales
-CVE-2018-7169 login (low urgency)
-CVE-2021-27928 mariadb-common
-CVE-2018-15919 openssh-client (low urgency)
-CVE-2018-15919 openssh-server (low urgency)
-CVE-2018-15919 openssh-sftp-server (low urgency)
-CVE-2018-7169 passwd (low urgency)
-CVE-2019-20907 python2.7 (low urgency)
-CVE-2020-8492 python2.7 (low urgency)
-CVE-2021-23336 python2.7
-CVE-2021-3177 python2.7
-CVE-2019-20907 python2.7-minimal (low urgency)
-CVE-2020-8492 python2.7-minimal (low urgency)
-CVE-2021-23336 python2.7-minimal
-CVE-2021-3177 python2.7-minimal
-CVE-2020-11078 python3-httplib2
-CVE-2021-21240 python3-httplib2
-CVE-2019-11236 python3-urllib3
-CVE-2020-26137 python3-urllib3
-CVE-2020-26116 python3.7
-CVE-2021-23336 python3.7
-CVE-2021-3177 python3.7
-CVE-2021-3426 python3.7
-CVE-2020-26116 python3.7-minimal
-CVE-2021-23336 python3.7-minimal
-CVE-2021-3177 python3.7-minimal
-CVE-2021-3426 python3.7-minimal
-CVE-2019-17041 rsyslog
-CVE-2019-17042 rsyslog
-CVE-2019-20807 vim-common
-CVE-2019-20807 vim-tiny
-CVE-2020-12695 wpasupplicant
-CVE-2021-0326 wpasupplicant
-CVE-2021-27803 wpasupplicant
-CVE-2019-20807 xxd
-“””</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CVE</span><span class="o">-</span><span class="mi">2016</span><span class="o">-</span><span class="mi">1585</span> <span class="n">apparmor</span> <span class="p">(</span><span class="n">low</span> <span class="n">urgency</span><span class="p">)</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2019</span><span class="o">-</span><span class="mi">17544</span> <span class="n">aspell</span> <span class="p">(</span><span class="n">low</span> <span class="n">urgency</span><span class="p">)</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2019</span><span class="o">-</span><span class="mi">20433</span> <span class="n">aspell</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2021</span><span class="o">-</span><span class="mi">26720</span> <span class="n">avahi</span><span class="o">-</span><span class="n">autoipd</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2018</span><span class="o">-</span><span class="mi">10910</span> <span class="n">bluetooth</span> <span class="p">(</span><span class="n">low</span> <span class="n">urgency</span><span class="p">)</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2020</span><span class="o">-</span><span class="mi">27153</span> <span class="n">bluetooth</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2018</span><span class="o">-</span><span class="mi">10910</span> <span class="n">bluez</span> <span class="p">(</span><span class="n">low</span> <span class="n">urgency</span><span class="p">)</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2020</span><span class="o">-</span><span class="mi">27153</span> <span class="n">bluez</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2021</span><span class="o">-</span><span class="mi">28831</span> <span class="n">busybox</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2016</span><span class="o">-</span><span class="mi">2781</span> <span class="n">coreutils</span> <span class="p">(</span><span class="n">low</span> <span class="n">urgency</span><span class="p">)</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2019</span><span class="o">-</span><span class="mi">14866</span> <span class="n">cpio</span> <span class="p">(</span><span class="n">low</span> <span class="n">urgency</span><span class="p">)</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2019</span><span class="o">-</span><span class="mi">14855</span> <span class="n">dirmngr</span> <span class="p">(</span><span class="n">low</span> <span class="n">urgency</span><span class="p">)</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2018</span><span class="o">-</span><span class="mi">12886</span> <span class="n">gcc</span><span class="o">-</span><span class="mi">8</span><span class="o">-</span><span class="n">base</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2019</span><span class="o">-</span><span class="mi">15847</span> <span class="n">gcc</span><span class="o">-</span><span class="mi">8</span><span class="o">-</span><span class="n">base</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2019</span><span class="o">-</span><span class="mi">14855</span> <span class="n">gnupg</span> <span class="p">(</span><span class="n">low</span> <span class="n">urgency</span><span class="p">)</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2019</span><span class="o">-</span><span class="mi">14855</span> <span class="n">gnupg</span><span class="o">-</span><span class="n">l10n</span> <span class="p">(</span><span class="n">low</span> <span class="n">urgency</span><span class="p">)</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2019</span><span class="o">-</span><span class="mi">14855</span> <span class="n">gnupg</span><span class="o">-</span><span class="n">utils</span> <span class="p">(</span><span class="n">low</span> <span class="n">urgency</span><span class="p">)</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2019</span><span class="o">-</span><span class="mi">14855</span> <span class="n">gpg</span> <span class="p">(</span><span class="n">low</span> <span class="n">urgency</span><span class="p">)</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2019</span><span class="o">-</span><span class="mi">14855</span> <span class="n">gpg</span><span class="o">-</span><span class="n">agent</span> <span class="p">(</span><span class="n">low</span> <span class="n">urgency</span><span class="p">)</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2019</span><span class="o">-</span><span class="mi">14855</span> <span class="n">gpg</span><span class="o">-</span><span class="n">wks</span><span class="o">-</span><span class="n">client</span> <span class="p">(</span><span class="n">low</span> <span class="n">urgency</span><span class="p">)</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2019</span><span class="o">-</span><span class="mi">14855</span> <span class="n">gpg</span><span class="o">-</span><span class="n">wks</span><span class="o">-</span><span class="n">server</span> <span class="p">(</span><span class="n">low</span> <span class="n">urgency</span><span class="p">)</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2019</span><span class="o">-</span><span class="mi">14855</span> <span class="n">gpgconf</span> <span class="p">(</span><span class="n">low</span> <span class="n">urgency</span><span class="p">)</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2019</span><span class="o">-</span><span class="mi">14855</span> <span class="n">gpgsm</span> <span class="p">(</span><span class="n">low</span> <span class="n">urgency</span><span class="p">)</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2019</span><span class="o">-</span><span class="mi">14855</span> <span class="n">gpgv</span> <span class="p">(</span><span class="n">low</span> <span class="n">urgency</span><span class="p">)</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2016</span><span class="o">-</span><span class="mi">1585</span> <span class="n">libapparmor1</span> <span class="p">(</span><span class="n">low</span> <span class="n">urgency</span><span class="p">)</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2019</span><span class="o">-</span><span class="mi">17544</span> <span class="n">libaspell15</span> <span class="p">(</span><span class="n">low</span> <span class="n">urgency</span><span class="p">)</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2019</span><span class="o">-</span><span class="mi">20433</span> <span class="n">libaspell15</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2019</span><span class="o">-</span><span class="mi">20367</span> <span class="n">libbsd0</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2016</span><span class="o">-</span><span class="mi">10228</span> <span class="n">libc</span><span class="o">-</span><span class="nb">bin</span> <span class="p">(</span><span class="n">low</span> <span class="n">urgency</span><span class="p">)</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2019</span><span class="o">-</span><span class="mi">25013</span> <span class="n">libc</span><span class="o">-</span><span class="nb">bin</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2020</span><span class="o">-</span><span class="mi">10029</span> <span class="n">libc</span><span class="o">-</span><span class="nb">bin</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2020</span><span class="o">-</span><span class="mi">1751</span> <span class="n">libc</span><span class="o">-</span><span class="nb">bin</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2020</span><span class="o">-</span><span class="mi">1752</span> <span class="n">libc</span><span class="o">-</span><span class="nb">bin</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2020</span><span class="o">-</span><span class="mi">27618</span> <span class="n">libc</span><span class="o">-</span><span class="nb">bin</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2020</span><span class="o">-</span><span class="mi">6096</span> <span class="n">libc</span><span class="o">-</span><span class="nb">bin</span> <span class="p">(</span><span class="n">low</span> <span class="n">urgency</span><span class="p">)</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2021</span><span class="o">-</span><span class="mi">27645</span> <span class="n">libc</span><span class="o">-</span><span class="nb">bin</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2021</span><span class="o">-</span><span class="mi">3326</span> <span class="n">libc</span><span class="o">-</span><span class="nb">bin</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2016</span><span class="o">-</span><span class="mi">10228</span> <span class="n">libc</span><span class="o">-</span><span class="n">l10n</span> <span class="p">(</span><span class="n">low</span> <span class="n">urgency</span><span class="p">)</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2019</span><span class="o">-</span><span class="mi">25013</span> <span class="n">libc</span><span class="o">-</span><span class="n">l10n</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2020</span><span class="o">-</span><span class="mi">10029</span> <span class="n">libc</span><span class="o">-</span><span class="n">l10n</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2020</span><span class="o">-</span><span class="mi">1751</span> <span class="n">libc</span><span class="o">-</span><span class="n">l10n</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2020</span><span class="o">-</span><span class="mi">1752</span> <span class="n">libc</span><span class="o">-</span><span class="n">l10n</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2020</span><span class="o">-</span><span class="mi">27618</span> <span class="n">libc</span><span class="o">-</span><span class="n">l10n</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2020</span><span class="o">-</span><span class="mi">6096</span> <span class="n">libc</span><span class="o">-</span><span class="n">l10n</span> <span class="p">(</span><span class="n">low</span> <span class="n">urgency</span><span class="p">)</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2021</span><span class="o">-</span><span class="mi">27645</span> <span class="n">libc</span><span class="o">-</span><span class="n">l10n</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2021</span><span class="o">-</span><span class="mi">3326</span> <span class="n">libc</span><span class="o">-</span><span class="n">l10n</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2016</span><span class="o">-</span><span class="mi">10228</span> <span class="n">libc6</span> <span class="p">(</span><span class="n">low</span> <span class="n">urgency</span><span class="p">)</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2019</span><span class="o">-</span><span class="mi">25013</span> <span class="n">libc6</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2020</span><span class="o">-</span><span class="mi">10029</span> <span class="n">libc6</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2020</span><span class="o">-</span><span class="mi">1751</span> <span class="n">libc6</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2020</span><span class="o">-</span><span class="mi">1752</span> <span class="n">libc6</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2020</span><span class="o">-</span><span class="mi">27618</span> <span class="n">libc6</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2020</span><span class="o">-</span><span class="mi">6096</span> <span class="n">libc6</span> <span class="p">(</span><span class="n">low</span> <span class="n">urgency</span><span class="p">)</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2021</span><span class="o">-</span><span class="mi">27645</span> <span class="n">libc6</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2021</span><span class="o">-</span><span class="mi">3326</span> <span class="n">libc6</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2020</span><span class="o">-</span><span class="mi">8177</span> <span class="n">libcurl3</span><span class="o">-</span><span class="n">gnutls</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2020</span><span class="o">-</span><span class="mi">8231</span> <span class="n">libcurl3</span><span class="o">-</span><span class="n">gnutls</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2020</span><span class="o">-</span><span class="mi">8284</span> <span class="n">libcurl3</span><span class="o">-</span><span class="n">gnutls</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2020</span><span class="o">-</span><span class="mi">8285</span> <span class="n">libcurl3</span><span class="o">-</span><span class="n">gnutls</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2020</span><span class="o">-</span><span class="mi">8286</span> <span class="n">libcurl3</span><span class="o">-</span><span class="n">gnutls</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2018</span><span class="o">-</span><span class="mi">12886</span> <span class="n">libgcc1</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2019</span><span class="o">-</span><span class="mi">15847</span> <span class="n">libgcc1</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2019</span><span class="o">-</span><span class="mi">13627</span> <span class="n">libgcrypt20</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2021</span><span class="o">-</span><span class="mi">27218</span> <span class="n">libglib2</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="mi">0</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2021</span><span class="o">-</span><span class="mi">27219</span> <span class="n">libglib2</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="mi">0</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2021</span><span class="o">-</span><span class="mi">28153</span> <span class="n">libglib2</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="mi">0</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2021</span><span class="o">-</span><span class="mi">27218</span> <span class="n">libglib2</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">data</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2021</span><span class="o">-</span><span class="mi">27219</span> <span class="n">libglib2</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">data</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2021</span><span class="o">-</span><span class="mi">28153</span> <span class="n">libglib2</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">data</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2019</span><span class="o">-</span><span class="mi">12290</span> <span class="n">libidn2</span><span class="o">-</span><span class="mi">0</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2019</span><span class="o">-</span><span class="mi">17543</span> <span class="n">liblz4</span><span class="o">-</span><span class="mi">1</span> <span class="p">(</span><span class="n">low</span> <span class="n">urgency</span><span class="p">)</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2021</span><span class="o">-</span><span class="mi">27928</span> <span class="n">libmariadb3</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2019</span><span class="o">-</span><span class="mi">20454</span> <span class="n">libpcre2</span><span class="o">-</span><span class="mi">8</span><span class="o">-</span><span class="mi">0</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2020</span><span class="o">-</span><span class="mi">14155</span> <span class="n">libpcre3</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2019</span><span class="o">-</span><span class="mi">20907</span> <span class="n">libpython2</span><span class="o">.</span><span class="mi">7</span> <span class="p">(</span><span class="n">low</span> <span class="n">urgency</span><span class="p">)</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2020</span><span class="o">-</span><span class="mi">8492</span> <span class="n">libpython2</span><span class="o">.</span><span class="mi">7</span> <span class="p">(</span><span class="n">low</span> <span class="n">urgency</span><span class="p">)</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2021</span><span class="o">-</span><span class="mi">23336</span> <span class="n">libpython2</span><span class="o">.</span><span class="mi">7</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2021</span><span class="o">-</span><span class="mi">3177</span> <span class="n">libpython2</span><span class="o">.</span><span class="mi">7</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2019</span><span class="o">-</span><span class="mi">20907</span> <span class="n">libpython2</span><span class="o">.</span><span class="mi">7</span><span class="o">-</span><span class="n">minimal</span> <span class="p">(</span><span class="n">low</span> <span class="n">urgency</span><span class="p">)</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2020</span><span class="o">-</span><span class="mi">8492</span> <span class="n">libpython2</span><span class="o">.</span><span class="mi">7</span><span class="o">-</span><span class="n">minimal</span> <span class="p">(</span><span class="n">low</span> <span class="n">urgency</span><span class="p">)</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2021</span><span class="o">-</span><span class="mi">23336</span> <span class="n">libpython2</span><span class="o">.</span><span class="mi">7</span><span class="o">-</span><span class="n">minimal</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2021</span><span class="o">-</span><span class="mi">3177</span> <span class="n">libpython2</span><span class="o">.</span><span class="mi">7</span><span class="o">-</span><span class="n">minimal</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2019</span><span class="o">-</span><span class="mi">20907</span> <span class="n">libpython2</span><span class="o">.</span><span class="mi">7</span><span class="o">-</span><span class="n">stdlib</span> <span class="p">(</span><span class="n">low</span> <span class="n">urgency</span><span class="p">)</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2020</span><span class="o">-</span><span class="mi">8492</span> <span class="n">libpython2</span><span class="o">.</span><span class="mi">7</span><span class="o">-</span><span class="n">stdlib</span> <span class="p">(</span><span class="n">low</span> <span class="n">urgency</span><span class="p">)</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2021</span><span class="o">-</span><span class="mi">23336</span> <span class="n">libpython2</span><span class="o">.</span><span class="mi">7</span><span class="o">-</span><span class="n">stdlib</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2021</span><span class="o">-</span><span class="mi">3177</span> <span class="n">libpython2</span><span class="o">.</span><span class="mi">7</span><span class="o">-</span><span class="n">stdlib</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2020</span><span class="o">-</span><span class="mi">26116</span> <span class="n">libpython3</span><span class="o">.</span><span class="mi">7</span><span class="o">-</span><span class="n">minimal</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2021</span><span class="o">-</span><span class="mi">23336</span> <span class="n">libpython3</span><span class="o">.</span><span class="mi">7</span><span class="o">-</span><span class="n">minimal</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2021</span><span class="o">-</span><span class="mi">3177</span> <span class="n">libpython3</span><span class="o">.</span><span class="mi">7</span><span class="o">-</span><span class="n">minimal</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2021</span><span class="o">-</span><span class="mi">3426</span> <span class="n">libpython3</span><span class="o">.</span><span class="mi">7</span><span class="o">-</span><span class="n">minimal</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2020</span><span class="o">-</span><span class="mi">26116</span> <span class="n">libpython3</span><span class="o">.</span><span class="mi">7</span><span class="o">-</span><span class="n">stdlib</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2021</span><span class="o">-</span><span class="mi">23336</span> <span class="n">libpython3</span><span class="o">.</span><span class="mi">7</span><span class="o">-</span><span class="n">stdlib</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2021</span><span class="o">-</span><span class="mi">3177</span> <span class="n">libpython3</span><span class="o">.</span><span class="mi">7</span><span class="o">-</span><span class="n">stdlib</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2021</span><span class="o">-</span><span class="mi">3426</span> <span class="n">libpython3</span><span class="o">.</span><span class="mi">7</span><span class="o">-</span><span class="n">stdlib</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2019</span><span class="o">-</span><span class="mi">13115</span> <span class="n">libssh2</span><span class="o">-</span><span class="mi">1</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2019</span><span class="o">-</span><span class="mi">17498</span> <span class="n">libssh2</span><span class="o">-</span><span class="mi">1</span> <span class="p">(</span><span class="n">low</span> <span class="n">urgency</span><span class="p">)</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2018</span><span class="o">-</span><span class="mi">12886</span> <span class="n">libstdc</span><span class="o">++</span><span class="mi">6</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2019</span><span class="o">-</span><span class="mi">15847</span> <span class="n">libstdc</span><span class="o">++</span><span class="mi">6</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2016</span><span class="o">-</span><span class="mi">9318</span> <span class="n">libxml2</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2017</span><span class="o">-</span><span class="mi">16932</span> <span class="n">libxml2</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2016</span><span class="o">-</span><span class="mi">10228</span> <span class="n">locales</span> <span class="p">(</span><span class="n">low</span> <span class="n">urgency</span><span class="p">)</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2019</span><span class="o">-</span><span class="mi">25013</span> <span class="n">locales</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2020</span><span class="o">-</span><span class="mi">10029</span> <span class="n">locales</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2020</span><span class="o">-</span><span class="mi">1751</span> <span class="n">locales</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2020</span><span class="o">-</span><span class="mi">1752</span> <span class="n">locales</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2020</span><span class="o">-</span><span class="mi">27618</span> <span class="n">locales</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2020</span><span class="o">-</span><span class="mi">6096</span> <span class="n">locales</span> <span class="p">(</span><span class="n">low</span> <span class="n">urgency</span><span class="p">)</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2021</span><span class="o">-</span><span class="mi">27645</span> <span class="n">locales</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2021</span><span class="o">-</span><span class="mi">3326</span> <span class="n">locales</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2018</span><span class="o">-</span><span class="mi">7169</span> <span class="n">login</span> <span class="p">(</span><span class="n">low</span> <span class="n">urgency</span><span class="p">)</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2021</span><span class="o">-</span><span class="mi">27928</span> <span class="n">mariadb</span><span class="o">-</span><span class="n">common</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2018</span><span class="o">-</span><span class="mi">15919</span> <span class="n">openssh</span><span class="o">-</span><span class="n">client</span> <span class="p">(</span><span class="n">low</span> <span class="n">urgency</span><span class="p">)</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2018</span><span class="o">-</span><span class="mi">15919</span> <span class="n">openssh</span><span class="o">-</span><span class="n">server</span> <span class="p">(</span><span class="n">low</span> <span class="n">urgency</span><span class="p">)</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2018</span><span class="o">-</span><span class="mi">15919</span> <span class="n">openssh</span><span class="o">-</span><span class="n">sftp</span><span class="o">-</span><span class="n">server</span> <span class="p">(</span><span class="n">low</span> <span class="n">urgency</span><span class="p">)</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2018</span><span class="o">-</span><span class="mi">7169</span> <span class="n">passwd</span> <span class="p">(</span><span class="n">low</span> <span class="n">urgency</span><span class="p">)</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2019</span><span class="o">-</span><span class="mi">20907</span> <span class="n">python2</span><span class="o">.</span><span class="mi">7</span> <span class="p">(</span><span class="n">low</span> <span class="n">urgency</span><span class="p">)</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2020</span><span class="o">-</span><span class="mi">8492</span> <span class="n">python2</span><span class="o">.</span><span class="mi">7</span> <span class="p">(</span><span class="n">low</span> <span class="n">urgency</span><span class="p">)</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2021</span><span class="o">-</span><span class="mi">23336</span> <span class="n">python2</span><span class="o">.</span><span class="mi">7</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2021</span><span class="o">-</span><span class="mi">3177</span> <span class="n">python2</span><span class="o">.</span><span class="mi">7</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2019</span><span class="o">-</span><span class="mi">20907</span> <span class="n">python2</span><span class="o">.</span><span class="mi">7</span><span class="o">-</span><span class="n">minimal</span> <span class="p">(</span><span class="n">low</span> <span class="n">urgency</span><span class="p">)</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2020</span><span class="o">-</span><span class="mi">8492</span> <span class="n">python2</span><span class="o">.</span><span class="mi">7</span><span class="o">-</span><span class="n">minimal</span> <span class="p">(</span><span class="n">low</span> <span class="n">urgency</span><span class="p">)</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2021</span><span class="o">-</span><span class="mi">23336</span> <span class="n">python2</span><span class="o">.</span><span class="mi">7</span><span class="o">-</span><span class="n">minimal</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2021</span><span class="o">-</span><span class="mi">3177</span> <span class="n">python2</span><span class="o">.</span><span class="mi">7</span><span class="o">-</span><span class="n">minimal</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2020</span><span class="o">-</span><span class="mi">11078</span> <span class="n">python3</span><span class="o">-</span><span class="n">httplib2</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2021</span><span class="o">-</span><span class="mi">21240</span> <span class="n">python3</span><span class="o">-</span><span class="n">httplib2</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2019</span><span class="o">-</span><span class="mi">11236</span> <span class="n">python3</span><span class="o">-</span><span class="n">urllib3</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2020</span><span class="o">-</span><span class="mi">26137</span> <span class="n">python3</span><span class="o">-</span><span class="n">urllib3</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2020</span><span class="o">-</span><span class="mi">26116</span> <span class="n">python3</span><span class="o">.</span><span class="mi">7</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2021</span><span class="o">-</span><span class="mi">23336</span> <span class="n">python3</span><span class="o">.</span><span class="mi">7</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2021</span><span class="o">-</span><span class="mi">3177</span> <span class="n">python3</span><span class="o">.</span><span class="mi">7</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2021</span><span class="o">-</span><span class="mi">3426</span> <span class="n">python3</span><span class="o">.</span><span class="mi">7</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2020</span><span class="o">-</span><span class="mi">26116</span> <span class="n">python3</span><span class="o">.</span><span class="mi">7</span><span class="o">-</span><span class="n">minimal</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2021</span><span class="o">-</span><span class="mi">23336</span> <span class="n">python3</span><span class="o">.</span><span class="mi">7</span><span class="o">-</span><span class="n">minimal</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2021</span><span class="o">-</span><span class="mi">3177</span> <span class="n">python3</span><span class="o">.</span><span class="mi">7</span><span class="o">-</span><span class="n">minimal</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2021</span><span class="o">-</span><span class="mi">3426</span> <span class="n">python3</span><span class="o">.</span><span class="mi">7</span><span class="o">-</span><span class="n">minimal</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2019</span><span class="o">-</span><span class="mi">17041</span> <span class="n">rsyslog</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2019</span><span class="o">-</span><span class="mi">17042</span> <span class="n">rsyslog</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2019</span><span class="o">-</span><span class="mi">20807</span> <span class="n">vim</span><span class="o">-</span><span class="n">common</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2019</span><span class="o">-</span><span class="mi">20807</span> <span class="n">vim</span><span class="o">-</span><span class="n">tiny</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2020</span><span class="o">-</span><span class="mi">12695</span> <span class="n">wpasupplicant</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2021</span><span class="o">-</span><span class="mi">0326</span> <span class="n">wpasupplicant</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2021</span><span class="o">-</span><span class="mi">27803</span> <span class="n">wpasupplicant</span>
+<span class="n">CVE</span><span class="o">-</span><span class="mi">2019</span><span class="o">-</span><span class="mi">20807</span> <span class="n">xxd</span>
+</pre></div>
+</div>
 </div>
 
 
@@ -319,7 +323,7 @@ CVE-2019-20807 xxd
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="hardening_grub.html" class="btn btn-neutral float-left" title="Hardening de Grub" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
+        <a href="desactivation_magickeys.html" class="btn btn-neutral float-left" title="Désactivation des Magic keys" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
     </div>
 
   <hr/>

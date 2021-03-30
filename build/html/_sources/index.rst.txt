@@ -24,6 +24,7 @@
    src/hardening_openssh
    src/confinement_droits_sudo
    src/hardening_grub
+   src/desactivation_magickeys
 
 =============================================
 
