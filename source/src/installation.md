@@ -15,7 +15,7 @@
 
 ## Procédures
 
-Définissons un motde passe robuste pour l'utilisateur root
+Définissons un mot de passe robuste pour l'utilisateur root
 
 ![](img/install/mdp_root.png)
 
