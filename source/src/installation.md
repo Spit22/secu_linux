@@ -2,6 +2,7 @@
 
 ## Classification
 
+* Principes : Minimisation
 * Installation
 * Chiffrement de disque
 
