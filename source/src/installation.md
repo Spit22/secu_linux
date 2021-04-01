@@ -39,7 +39,7 @@ Fixons la taille maximale pour notre unique partition :
 
 ![](img/install/choix_taille_partition.png)
 
-On choisit d’utiliser les 8Go pour la partition root, et de n’affecter aucun SWAP. En effet, la machine virtuelle créée possède 4Go RAM, ce qui ne sera jamais dépassé pour notre utilisation.
+On choisit d’utiliser les 8Go pour la partition root, et de n’affecter aucun SWAP. En effet, la machine virtuelle créée possède 4Go RAM, ce qui ne sera jamais dépassé pour notre utilisation. Cependant, il est conseillé, sauf cas spécifique, de toujours laisser une partition SWAP. En effet, l'absence de cette dernière pourrait causer des erreurs lors de l'execution de certains programmes.
 
 Voici le résumé du partitionnement :
 
