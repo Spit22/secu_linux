@@ -1,13 +1,13 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="fr" >
+<html class="writer-html4" lang="en" >
 <head>
   <meta charset="utf-8" />
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Hardening de OpenSSH &mdash; Documentation TD Sécurité Linux 1.0</title>
+  <title>Hardening de OpenSSH &mdash; Sécurité Linux v1.0 documentation</title>
   
 
   
@@ -29,18 +29,18 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/translations.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
     
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Confinement des droits sudo" href="confinement_droits_sudo.html" />
-    <link rel="prev" title="Applications des correctifs" href="application_correctifs.html" /> 
+    <link rel="prev" title="Parefeu local" href="parefeu_local.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -54,7 +54,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home"> TD Sécurité Linux
+            <a href="../index.html" class="icon icon-home"> Sécurité Linux
           
 
           
@@ -68,7 +68,7 @@
           
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Rechercher docs" />
+    <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -85,12 +85,15 @@
               
             
             
-              <p class="caption"><span class="caption-text">Recommandations minimales ANSSI :</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Procédure d”installation</a></li>
+              <p class="caption"><span class="caption-text">Niveau minimal ANSSI</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Procédure d’installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hardening_PAM.html">Hardening PAM</a></li>
-<li class="toctree-l1"><a class="reference internal" href="parefeu_local.html">Parefeu local</a></li>
 <li class="toctree-l1"><a class="reference internal" href="application_correctifs.html">Applications des correctifs</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Niveau intermédiaire ANSSI</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="parefeu_local.html">Parefeu local</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Hardening de OpenSSH</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#classification">Classification</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#sources">Sources</a></li>
@@ -104,6 +107,16 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="confinement_droits_sudo.html">Confinement des droits sudo</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hardening_grub.html">Hardening de Grub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="desactivation_magickeys.html">Désactivation des Magic keys</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsyslog.html">Rsyslog</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Niveau renforcé ANSSI</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="auditd.html">Auditd</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Audits de sécurité</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="audit_lynis.html">Audit Lynis</a></li>
 </ul>
 
             
@@ -119,7 +132,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">TD Sécurité Linux</a>
+          <a href="../index.html">Sécurité Linux</a>
         
       </nav>
 
@@ -158,7 +171,7 @@
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/src/hardening_openssh.md.txt" rel="nofollow"> Afficher la source de la page</a>
+            <a href="../_sources/src/hardening_openssh.md.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -172,47 +185,47 @@
            <div itemprop="articleBody">
             
   <div class="section" id="hardening-de-openssh">
-<h1>Hardening de OpenSSH<a class="headerlink" href="#hardening-de-openssh" title="Lien permanent vers ce titre">¶</a></h1>
-<p>Le service OpenSSH est le point d”entrée principal de notre système Linux. Il est donc primordial de durcir ce service.</p>
+<h1>Hardening de OpenSSH<a class="headerlink" href="#hardening-de-openssh" title="Permalink to this headline">¶</a></h1>
+<p>Le service OpenSSH est le point d’entrée principal de notre système Linux. Il est donc primordial de durcir ce service.</p>
 <div class="section" id="classification">
-<h2>Classification<a class="headerlink" href="#classification" title="Lien permanent vers ce titre">¶</a></h2>
+<h2>Classification<a class="headerlink" href="#classification" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>Niveau ANSSI : intermédiaire</p></li>
-<li><p>Authentification</p></li>
-<li><p>Accès à distance</p></li>
+<li>Niveau ANSSI : intermédiaire</li>
+<li>Authentification</li>
+<li>Accès à distance</li>
 </ul>
 </div>
 <div class="section" id="sources">
-<h2>Sources<a class="headerlink" href="#sources" title="Lien permanent vers ce titre">¶</a></h2>
+<h2>Sources<a class="headerlink" href="#sources" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p><a class="reference external" href="https://www.ssi.gouv.fr/uploads/2016/01/linux_configuration-fr-v1.2.pdf">ANSSI</a></p></li>
-<li><p><a class="reference external" href="https://lecrabeinfo.net/se-connecter-en-ssh-par-echange-de-cles-ssh.html">LeCrabeInfo</a></p></li>
+<li><a class="reference external" href="https://www.ssi.gouv.fr/uploads/2016/01/linux_configuration-fr-v1.2.pdf">ANSSI</a></li>
+<li><a class="reference external" href="https://lecrabeinfo.net/se-connecter-en-ssh-par-echange-de-cles-ssh.html">LeCrabeInfo</a></li>
 </ul>
 </div>
 <div class="section" id="procedures">
-<h2>Procédures<a class="headerlink" href="#procedures" title="Lien permanent vers ce titre">¶</a></h2>
+<h2>Procédures<a class="headerlink" href="#procedures" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="authentification-avec-cle-ssh">
-<h3>Authentification avec clé SSH<a class="headerlink" href="#authentification-avec-cle-ssh" title="Lien permanent vers ce titre">¶</a></h3>
-<p>L”authentification s”effectuera désormais avec une clé SSH :</p>
+<h3>Authentification avec clé SSH<a class="headerlink" href="#authentification-avec-cle-ssh" title="Permalink to this headline">¶</a></h3>
+<p>L’authentification s’effectuera désormais avec une clé SSH :</p>
 <p><img alt="../_images/1_generate_ssh_key_for_auth.PNG" src="../_images/1_generate_ssh_key_for_auth.PNG" /></p>
 <p><img alt="../_images/2_deploy_key_on_remote_server.PNG" src="../_images/2_deploy_key_on_remote_server.PNG" /></p>
 <p><img alt="../_images/3_test_key_is_accepted.PNG" src="../_images/3_test_key_is_accepted.PNG" /></p>
 </div>
 <div class="section" id="configuration-de-sshd">
-<h3>Configuration de sshd<a class="headerlink" href="#configuration-de-sshd" title="Lien permanent vers ce titre">¶</a></h3>
+<h3>Configuration de sshd<a class="headerlink" href="#configuration-de-sshd" title="Permalink to this headline">¶</a></h3>
 <p>La configuration du service ssh est également durcie :</p>
 <ul class="simple">
-<li><p>le port d”écoute du service a été modifié (le parefeu local a été modifié en conséquence)</p></li>
-<li><p>l”authentification en tant qu”utilisateur root a été interdite</p></li>
-<li><p>l”authentification par mot de passe a été interdite</p></li>
-<li><p>les mécanismes de chiffrement utilisées sont robustes</p></li>
+<li>le port d’écoute du service a été modifié (le parefeu local a été modifié en conséquence)</li>
+<li>l’authentification en tant qu’utilisateur root a été interdite</li>
+<li>l’authentification par mot de passe a été interdite</li>
+<li>les mécanismes de chiffrement utilisées sont robustes</li>
 </ul>
 <p><img alt="../_images/4_configuration_sshd_config_part1.PNG" src="../_images/4_configuration_sshd_config_part1.PNG" /></p>
 <p><img alt="../_images/4_configuration_sshd_config_part2.PNG" src="../_images/4_configuration_sshd_config_part2.PNG" /></p>
 </div>
 </div>
 <div class="section" id="commentaires">
-<h2>Commentaires<a class="headerlink" href="#commentaires" title="Lien permanent vers ce titre">¶</a></h2>
+<h2>Commentaires<a class="headerlink" href="#commentaires" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
@@ -222,8 +235,8 @@
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="confinement_droits_sudo.html" class="btn btn-neutral float-right" title="Confinement des droits sudo" accesskey="n" rel="next">Suivant <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="application_correctifs.html" class="btn btn-neutral float-left" title="Applications des correctifs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
+        <a href="confinement_droits_sudo.html" class="btn btn-neutral float-right" title="Confinement des droits sudo" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="parefeu_local.html" class="btn btn-neutral float-left" title="Parefeu local" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>
@@ -237,11 +250,11 @@
     
     
     
-    Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
     
-    fourni par <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
         </div>

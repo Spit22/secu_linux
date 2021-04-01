@@ -1,13 +1,13 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="fr" >
+<html class="writer-html4" lang="en" >
 <head>
   <meta charset="utf-8" />
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Applications des correctifs &mdash; Documentation TD Sécurité Linux 1.0</title>
+  <title>Applications des correctifs &mdash; Sécurité Linux v1.0 documentation</title>
   
 
   
@@ -29,18 +29,18 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/translations.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
     
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Recherche" href="../search.html" />
-    <link rel="next" title="Hardening de OpenSSH" href="hardening_openssh.html" />
-    <link rel="prev" title="Parefeu local" href="parefeu_local.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Parefeu local" href="parefeu_local.html" />
+    <link rel="prev" title="Hardening PAM" href="hardening_PAM.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -54,7 +54,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home"> TD Sécurité Linux
+            <a href="../index.html" class="icon icon-home"> Sécurité Linux
           
 
           
@@ -68,7 +68,7 @@
           
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Rechercher docs" />
+    <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -85,11 +85,10 @@
               
             
             
-              <p class="caption"><span class="caption-text">Recommandations minimales ANSSI :</span></p>
+              <p class="caption"><span class="caption-text">Niveau minimal ANSSI</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Procédure d”installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Procédure d’installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hardening_PAM.html">Hardening PAM</a></li>
-<li class="toctree-l1"><a class="reference internal" href="parefeu_local.html">Parefeu local</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Applications des correctifs</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#classification">Classification</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#sources">Sources</a></li>
@@ -102,9 +101,23 @@
 <li class="toctree-l2"><a class="reference internal" href="#commentaires">Commentaires</a></li>
 </ul>
 </li>
+</ul>
+<p class="caption"><span class="caption-text">Niveau intermédiaire ANSSI</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="parefeu_local.html">Parefeu local</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hardening_openssh.html">Hardening de OpenSSH</a></li>
 <li class="toctree-l1"><a class="reference internal" href="confinement_droits_sudo.html">Confinement des droits sudo</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hardening_grub.html">Hardening de Grub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="desactivation_magickeys.html">Désactivation des Magic keys</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsyslog.html">Rsyslog</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Niveau renforcé ANSSI</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="auditd.html">Auditd</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Audits de sécurité</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="audit_lynis.html">Audit Lynis</a></li>
 </ul>
 
             
@@ -120,7 +133,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">TD Sécurité Linux</a>
+          <a href="../index.html">Sécurité Linux</a>
         
       </nav>
 
@@ -159,7 +172,7 @@
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/src/application_correctifs.md.txt" rel="nofollow"> Afficher la source de la page</a>
+            <a href="../_sources/src/application_correctifs.md.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -173,42 +186,42 @@
            <div itemprop="articleBody">
             
   <div class="section" id="applications-des-correctifs">
-<h1>Applications des correctifs<a class="headerlink" href="#applications-des-correctifs" title="Lien permanent vers ce titre">¶</a></h1>
-<p>Nous allons mettre en place un mécanismes pour automatiser les mises à jour de sécurité sur notre système Linux. Pour cela, nous allons utiliser l”outil <em>unattended-upgrades</em>.</p>
+<h1>Applications des correctifs<a class="headerlink" href="#applications-des-correctifs" title="Permalink to this headline">¶</a></h1>
+<p>Nous allons mettre en place un mécanismes pour automatiser les mises à jour de sécurité sur notre système Linux. Pour cela, nous allons utiliser l’outil <em>unattended-upgrades</em>.</p>
 <div class="section" id="classification">
-<h2>Classification<a class="headerlink" href="#classification" title="Lien permanent vers ce titre">¶</a></h2>
+<h2>Classification<a class="headerlink" href="#classification" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>Niveau ANSSI : intermédiaire</p></li>
-<li><p>Mises à jour</p></li>
-<li><p>Patchs de sécurité</p></li>
-<li><p>Automatisation</p></li>
+<li>Niveau ANSSI : intermédiaire</li>
+<li>Mises à jour</li>
+<li>Patchs de sécurité</li>
+<li>Automatisation</li>
 </ul>
 </div>
 <div class="section" id="sources">
-<h2>Sources<a class="headerlink" href="#sources" title="Lien permanent vers ce titre">¶</a></h2>
+<h2>Sources<a class="headerlink" href="#sources" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p><a class="reference external" href="https://www.ssi.gouv.fr/uploads/2016/01/linux_configuration-fr-v1.2.pdf">ANSSI</a></p></li>
-<li><p><a class="reference external" href="https://www.kanjian.fr/automatiser-mises-a-jour-de-serveur-debian.html#.YGGZxa8zaUl">unattended-upgrades</a></p></li>
+<li><a class="reference external" href="https://www.ssi.gouv.fr/uploads/2016/01/linux_configuration-fr-v1.2.pdf">ANSSI</a></li>
+<li><a class="reference external" href="https://www.kanjian.fr/automatiser-mises-a-jour-de-serveur-debian.html#.YGGZxa8zaUl">unattended-upgrades</a></li>
 </ul>
 </div>
 <div class="section" id="procedures">
-<h2>Procédures<a class="headerlink" href="#procedures" title="Lien permanent vers ce titre">¶</a></h2>
+<h2>Procédures<a class="headerlink" href="#procedures" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="installation">
-<h3>Installation<a class="headerlink" href="#installation" title="Lien permanent vers ce titre">¶</a></h3>
+<h3>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h3>
 <p><img alt="../_images/installation.PNG" src="../_images/installation.PNG" /></p>
 </div>
 <div class="section" id="configuration">
-<h3>Configuration<a class="headerlink" href="#configuration" title="Lien permanent vers ce titre">¶</a></h3>
+<h3>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h3>
 <p><img alt="../_images/maj_for_security_only.PNG" src="../_images/maj_for_security_only.PNG" /></p>
 <p><img alt="../_images/disable_automatic_reboot.PNG" src="../_images/disable_automatic_reboot.PNG" /></p>
 </div>
 <div class="section" id="poc">
-<h3>PoC<a class="headerlink" href="#poc" title="Lien permanent vers ce titre">¶</a></h3>
+<h3>PoC<a class="headerlink" href="#poc" title="Permalink to this headline">¶</a></h3>
 <p><img alt="../_images/maj_poc.PNG" src="../_images/maj_poc.PNG" /></p>
 </div>
 </div>
 <div class="section" id="commentaires">
-<h2>Commentaires<a class="headerlink" href="#commentaires" title="Lien permanent vers ce titre">¶</a></h2>
+<h2>Commentaires<a class="headerlink" href="#commentaires" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
@@ -218,8 +231,8 @@
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="hardening_openssh.html" class="btn btn-neutral float-right" title="Hardening de OpenSSH" accesskey="n" rel="next">Suivant <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="parefeu_local.html" class="btn btn-neutral float-left" title="Parefeu local" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
+        <a href="parefeu_local.html" class="btn btn-neutral float-right" title="Parefeu local" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="hardening_PAM.html" class="btn btn-neutral float-left" title="Hardening PAM" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>
@@ -233,11 +246,11 @@
     
     
     
-    Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
     
-    fourni par <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
         </div>

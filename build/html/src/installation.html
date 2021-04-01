@@ -1,13 +1,13 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="fr" >
+<html class="writer-html4" lang="en" >
 <head>
   <meta charset="utf-8" />
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Procédure d”installation &mdash; Documentation TD Sécurité Linux 1.0</title>
+  <title>Procédure d’installation &mdash; Sécurité Linux v1.0 documentation</title>
   
 
   
@@ -29,18 +29,18 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/translations.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
     
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Hardening PAM" href="hardening_PAM.html" />
-    <link rel="prev" title="Recomandations ANSSI" href="../index.html" /> 
+    <link rel="prev" title="&lt;no title&gt;" href="../index.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -54,7 +54,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home"> TD Sécurité Linux
+            <a href="../index.html" class="icon icon-home"> Sécurité Linux
           
 
           
@@ -68,7 +68,7 @@
           
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Rechercher docs" />
+    <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -85,9 +85,9 @@
               
             
             
-              <p class="caption"><span class="caption-text">Recommandations minimales ANSSI :</span></p>
+              <p class="caption"><span class="caption-text">Niveau minimal ANSSI</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Procédure d”installation</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Procédure d’installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#classification">Classification</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#sources">Sources</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#procedures">Procédures</a></li>
@@ -95,11 +95,24 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="hardening_PAM.html">Hardening PAM</a></li>
-<li class="toctree-l1"><a class="reference internal" href="parefeu_local.html">Parefeu local</a></li>
 <li class="toctree-l1"><a class="reference internal" href="application_correctifs.html">Applications des correctifs</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Niveau intermédiaire ANSSI</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="parefeu_local.html">Parefeu local</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hardening_openssh.html">Hardening de OpenSSH</a></li>
 <li class="toctree-l1"><a class="reference internal" href="confinement_droits_sudo.html">Confinement des droits sudo</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hardening_grub.html">Hardening de Grub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="desactivation_magickeys.html">Désactivation des Magic keys</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsyslog.html">Rsyslog</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Niveau renforcé ANSSI</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="auditd.html">Auditd</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Audits de sécurité</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="audit_lynis.html">Audit Lynis</a></li>
 </ul>
 
             
@@ -115,7 +128,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">TD Sécurité Linux</a>
+          <a href="../index.html">Sécurité Linux</a>
         
       </nav>
 
@@ -148,13 +161,13 @@
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Procédure d”installation</li>
+      <li>Procédure d’installation</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/src/installation.md.txt" rel="nofollow"> Afficher la source de la page</a>
+            <a href="../_sources/src/installation.md.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -168,31 +181,31 @@
            <div itemprop="articleBody">
             
   <div class="section" id="procedure-d-installation">
-<h1>Procédure d”installation<a class="headerlink" href="#procedure-d-installation" title="Lien permanent vers ce titre">¶</a></h1>
+<h1>Procédure d’installation<a class="headerlink" href="#procedure-d-installation" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="classification">
-<h2>Classification<a class="headerlink" href="#classification" title="Lien permanent vers ce titre">¶</a></h2>
+<h2>Classification<a class="headerlink" href="#classification" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>Installation</p></li>
-<li><p>Chiffrement de disque</p></li>
+<li>Installation</li>
+<li>Chiffrement de disque</li>
 </ul>
 </div>
 <div class="section" id="sources">
-<h2>Sources<a class="headerlink" href="#sources" title="Lien permanent vers ce titre">¶</a></h2>
+<h2>Sources<a class="headerlink" href="#sources" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p><a class="reference external" href="https://www.ssi.gouv.fr/uploads/2016/01/linux_configuration-fr-v1.2.pdf">ANSSI</a></p></li>
-<li><p><a class="reference external" href="https://www.debian.org/doc/manuals/debian-handbook/">Debian Administrator Handbook</a></p></li>
-<li><p>Moodle</p></li>
+<li><a class="reference external" href="https://www.ssi.gouv.fr/uploads/2016/01/linux_configuration-fr-v1.2.pdf">ANSSI</a></li>
+<li><a class="reference external" href="https://www.debian.org/doc/manuals/debian-handbook/">Debian Administrator Handbook</a></li>
+<li>Moodle</li>
 </ul>
 </div>
 <div class="section" id="procedures">
-<h2>Procédures<a class="headerlink" href="#procedures" title="Lien permanent vers ce titre">¶</a></h2>
-<p>Définissons un motde passe robuste pour l”utilisateur root</p>
+<h2>Procédures<a class="headerlink" href="#procedures" title="Permalink to this headline">¶</a></h2>
+<p>Définissons un motde passe robuste pour l’utilisateur root</p>
 <p><img alt="../_images/mdp_root.png" src="../_images/mdp_root.png" /></p>
 <p>Créons ensuite un utilisateur nommé olivier :</p>
 <p><img alt="../_images/creation_olivier.png" src="../_images/creation_olivier.png" /></p>
 <p>Choisissons de stocker nos données dans des LVM chiffrés :</p>
 <p><img alt="../_images/choix_LVM.png" src="../_images/choix_LVM.png" /></p>
-<p>D”après les directives que nous avons reçus, nous ne créons qu”une seule partition</p>
+<p>D’après les directives que nous avons reçus, nous ne créons qu’une seule partition</p>
 <p><img alt="../_images/choix_partition.png" src="../_images/choix_partition.png" /></p>
 <p>Définissons un mot de passe robuste pour le chiffrement des LVM :</p>
 <p><img alt="../_images/mdp_chiffrement_disque.png" src="../_images/mdp_chiffrement_disque.png" /></p>
@@ -207,7 +220,7 @@
 <p><img alt="../_images/fin.png" src="../_images/fin.png" /></p>
 </div>
 <div class="section" id="commentaires">
-<h2>Commentaires<a class="headerlink" href="#commentaires" title="Lien permanent vers ce titre">¶</a></h2>
+<h2>Commentaires<a class="headerlink" href="#commentaires" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
@@ -217,8 +230,8 @@
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="hardening_PAM.html" class="btn btn-neutral float-right" title="Hardening PAM" accesskey="n" rel="next">Suivant <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="../index.html" class="btn btn-neutral float-left" title="Recomandations ANSSI" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
+        <a href="hardening_PAM.html" class="btn btn-neutral float-right" title="Hardening PAM" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../index.html" class="btn btn-neutral float-left" title="&lt;no title&gt;" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>
@@ -232,11 +245,11 @@
     
     
     
-    Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
     
-    fourni par <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
         </div>

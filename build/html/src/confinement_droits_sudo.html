@@ -1,13 +1,13 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="fr" >
+<html class="writer-html4" lang="en" >
 <head>
   <meta charset="utf-8" />
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Confinement des droits sudo &mdash; Documentation TD Sécurité Linux 1.0</title>
+  <title>Confinement des droits sudo &mdash; Sécurité Linux v1.0 documentation</title>
   
 
   
@@ -29,16 +29,16 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/translations.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
     
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Hardening de Grub" href="hardening_grub.html" />
     <link rel="prev" title="Hardening de OpenSSH" href="hardening_openssh.html" /> 
 </head>
@@ -54,7 +54,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home"> TD Sécurité Linux
+            <a href="../index.html" class="icon icon-home"> Sécurité Linux
           
 
           
@@ -68,7 +68,7 @@
           
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Rechercher docs" />
+    <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -85,12 +85,15 @@
               
             
             
-              <p class="caption"><span class="caption-text">Recommandations minimales ANSSI :</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Procédure d”installation</a></li>
+              <p class="caption"><span class="caption-text">Niveau minimal ANSSI</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Procédure d’installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hardening_PAM.html">Hardening PAM</a></li>
-<li class="toctree-l1"><a class="reference internal" href="parefeu_local.html">Parefeu local</a></li>
 <li class="toctree-l1"><a class="reference internal" href="application_correctifs.html">Applications des correctifs</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Niveau intermédiaire ANSSI</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="parefeu_local.html">Parefeu local</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hardening_openssh.html">Hardening de OpenSSH</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Confinement des droits sudo</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#classification">Classification</a></li>
@@ -100,6 +103,16 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="hardening_grub.html">Hardening de Grub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="desactivation_magickeys.html">Désactivation des Magic keys</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsyslog.html">Rsyslog</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Niveau renforcé ANSSI</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="auditd.html">Auditd</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Audits de sécurité</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="audit_lynis.html">Audit Lynis</a></li>
 </ul>
 
             
@@ -115,7 +128,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">TD Sécurité Linux</a>
+          <a href="../index.html">Sécurité Linux</a>
         
       </nav>
 
@@ -154,7 +167,7 @@
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/src/confinement_droits_sudo.md.txt" rel="nofollow"> Afficher la source de la page</a>
+            <a href="../_sources/src/confinement_droits_sudo.md.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -168,37 +181,37 @@
            <div itemprop="articleBody">
             
   <div class="section" id="confinement-des-droits-sudo">
-<h1>Confinement des droits sudo<a class="headerlink" href="#confinement-des-droits-sudo" title="Lien permanent vers ce titre">¶</a></h1>
-<p>Un utilisateur ayant des droits sudo peut avoir un grand impact sur un système Linux, c”est pourquoi ces droits doivent être octroyé avec précautions.</p>
+<h1>Confinement des droits sudo<a class="headerlink" href="#confinement-des-droits-sudo" title="Permalink to this headline">¶</a></h1>
+<p>Un utilisateur ayant des droits sudo peut avoir un grand impact sur un système Linux, c’est pourquoi ces droits doivent être octroyé avec précautions.</p>
 <div class="section" id="classification">
-<h2>Classification<a class="headerlink" href="#classification" title="Lien permanent vers ce titre">¶</a></h2>
+<h2>Classification<a class="headerlink" href="#classification" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>Niveau ANSSI : intermédiaire</p></li>
-<li><p>Gestion utilisateurs</p></li>
-<li><p>Gestion des droits des utilisateurs</p></li>
+<li>Niveau ANSSI : intermédiaire</li>
+<li>Gestion utilisateurs</li>
+<li>Gestion des droits des utilisateurs</li>
 </ul>
 </div>
 <div class="section" id="sources">
-<h2>Sources<a class="headerlink" href="#sources" title="Lien permanent vers ce titre">¶</a></h2>
+<h2>Sources<a class="headerlink" href="#sources" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p><a class="reference external" href="https://www.ssi.gouv.fr/uploads/2016/01/linux_configuration-fr-v1.2.pdf">ANSSI</a></p></li>
+<li><a class="reference external" href="https://www.ssi.gouv.fr/uploads/2016/01/linux_configuration-fr-v1.2.pdf">ANSSI</a></li>
 </ul>
 </div>
 <div class="section" id="procedures">
-<h2>Procédures<a class="headerlink" href="#procedures" title="Lien permanent vers ce titre">¶</a></h2>
-<p>Ajoutons l”utilisateur <em>bastien</em> au groupe <em>sudo</em> :</p>
+<h2>Procédures<a class="headerlink" href="#procedures" title="Permalink to this headline">¶</a></h2>
+<p>Ajoutons l’utilisateur <em>bastien</em> au groupe <em>sudo</em> :</p>
 <p><img alt="../_images/1_ajout_bastien_dans_sudo.PNG" src="../_images/1_ajout_bastien_dans_sudo.PNG" /></p>
-<p>Vérifions que <em>bastien</em> a bien des droits sudo en tentant d”accéder au fichier <em>/etc/shadow</em> :</p>
+<p>Vérifions que <em>bastien</em> a bien des droits sudo en tentant d’accéder au fichier <em>/etc/shadow</em> :</p>
 <p><img alt="../_images/2_verification.PNG" src="../_images/2_verification.PNG" /></p>
-<p>Nous pouvons également limiter les droits sudo à des applications spécifiques, exemple avec l”utilisateur stagiaire. On octroit des droits sudo à cet utilisateur seulement lors de l”utilisation de nmap :</p>
+<p>Nous pouvons également limiter les droits sudo à des applications spécifiques, exemple avec l’utilisateur stagiaire. On octroit des droits sudo à cet utilisateur seulement lors de l’utilisation de nmap :</p>
 <p><img alt="../_images/3_ajout_stagiaire_pour_exec_nmap_en_root.PNG" src="../_images/3_ajout_stagiaire_pour_exec_nmap_en_root.PNG" /></p>
-<p>Le stagiaire a donc le droit d”exécuter nmap en tant qu”utilisateur root :</p>
+<p>Le stagiaire a donc le droit d’exécuter nmap en tant qu’utilisateur root :</p>
 <p><img alt="../_images/4_verif_stagiaire.PNG" src="../_images/4_verif_stagiaire.PNG" /></p>
-<p>Mais le stagiaire n”a pas d”autres droits que celui ci :</p>
+<p>Mais le stagiaire n’a pas d’autres droits que celui ci :</p>
 <p><img alt="../_images/5_verif_stagiaire.PNG" src="../_images/5_verif_stagiaire.PNG" /></p>
 </div>
 <div class="section" id="commentaires">
-<h2>Commentaires<a class="headerlink" href="#commentaires" title="Lien permanent vers ce titre">¶</a></h2>
+<h2>Commentaires<a class="headerlink" href="#commentaires" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
@@ -208,8 +221,8 @@
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="hardening_grub.html" class="btn btn-neutral float-right" title="Hardening de Grub" accesskey="n" rel="next">Suivant <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="hardening_openssh.html" class="btn btn-neutral float-left" title="Hardening de OpenSSH" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
+        <a href="hardening_grub.html" class="btn btn-neutral float-right" title="Hardening de Grub" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="hardening_openssh.html" class="btn btn-neutral float-left" title="Hardening de OpenSSH" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>
@@ -223,11 +236,11 @@
     
     
     
-    Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
     
-    fourni par <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
         </div>

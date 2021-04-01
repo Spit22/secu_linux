@@ -1,13 +1,13 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="fr" >
+<html class="writer-html4" lang="en" >
 <head>
   <meta charset="utf-8" />
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Auditd &mdash; Documentation TD Sécurité Linux 1.0</title>
+  <title>Auditd &mdash; Sécurité Linux v1.0 documentation</title>
   
 
   
@@ -29,18 +29,18 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/translations.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
     
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Audit Lynis" href="audit_lynis.html" />
-    <link rel="prev" title="Désactivation des Magic keys" href="desactivation_magickeys.html" /> 
+    <link rel="prev" title="Rsyslog" href="rsyslog.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -54,7 +54,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home"> TD Sécurité Linux
+            <a href="../index.html" class="icon icon-home"> Sécurité Linux
           
 
           
@@ -68,7 +68,7 @@
           
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Rechercher docs" />
+    <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -87,7 +87,7 @@
             
               <p class="caption"><span class="caption-text">Niveau minimal ANSSI</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Procédure d”installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Procédure d’installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hardening_PAM.html">Hardening PAM</a></li>
 <li class="toctree-l1"><a class="reference internal" href="application_correctifs.html">Applications des correctifs</a></li>
 </ul>
@@ -98,6 +98,7 @@
 <li class="toctree-l1"><a class="reference internal" href="confinement_droits_sudo.html">Confinement des droits sudo</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hardening_grub.html">Hardening de Grub</a></li>
 <li class="toctree-l1"><a class="reference internal" href="desactivation_magickeys.html">Désactivation des Magic keys</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsyslog.html">Rsyslog</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Niveau renforcé ANSSI</span></p>
 <ul class="current">
@@ -127,7 +128,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">TD Sécurité Linux</a>
+          <a href="../index.html">Sécurité Linux</a>
         
       </nav>
 
@@ -166,7 +167,7 @@
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/src/auditd.md.txt" rel="nofollow"> Afficher la source de la page</a>
+            <a href="../_sources/src/auditd.md.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -180,31 +181,31 @@
            <div itemprop="articleBody">
             
   <div class="section" id="auditd">
-<h1>Auditd<a class="headerlink" href="#auditd" title="Lien permanent vers ce titre">¶</a></h1>
+<h1>Auditd<a class="headerlink" href="#auditd" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="classification">
-<h2>Classification<a class="headerlink" href="#classification" title="Lien permanent vers ce titre">¶</a></h2>
+<h2>Classification<a class="headerlink" href="#classification" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>Niveau ANSSI : renforcé</p></li>
-<li><p>Audit</p></li>
-<li><p>Journalisation</p></li>
+<li>Niveau ANSSI : renforcé</li>
+<li>Audit</li>
+<li>Journalisation</li>
 </ul>
 </div>
 <div class="section" id="sources">
-<h2>Sources<a class="headerlink" href="#sources" title="Lien permanent vers ce titre">¶</a></h2>
+<h2>Sources<a class="headerlink" href="#sources" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p><a class="reference external" href="https://www.ssi.gouv.fr/uploads/2016/01/linux_configuration-fr-v1.2.pdf">ANSSI</a></p></li>
-<li><p><a class="reference external" href="https://github.com/Neo23x0/auditd">Neo23x0</a></p></li>
-<li><p><a class="reference external" href="https://highon.coffee/blog/security-harden-centos-7/#auditd---audit-daemon">highon.coffee</a></p></li>
-<li><p><a class="reference external" href="https://github.com/linux-audit/audit-userspace/tree/master/rules">linux-audit</a></p></li>
-<li><p><a class="reference external" href="https://connect.ed-diamond.com/GNU-Linux-Magazine/GLMFHS-093/Journalisez-les-actions-de-vos-utilisateurs-avec-Auditd">connect.ed-diamond.com</a></p></li>
-<li><p><a class="reference external" href="https://linux-audit.com/configuring-and-auditing-linux-systems-with-audit-daemon/">linux-audit.com</a></p></li>
+<li><a class="reference external" href="https://www.ssi.gouv.fr/uploads/2016/01/linux_configuration-fr-v1.2.pdf">ANSSI</a></li>
+<li><a class="reference external" href="https://github.com/Neo23x0/auditd">Neo23x0</a></li>
+<li><a class="reference external" href="https://highon.coffee/blog/security-harden-centos-7/#auditd---audit-daemon">highon.coffee</a></li>
+<li><a class="reference external" href="https://github.com/linux-audit/audit-userspace/tree/master/rules">linux-audit</a></li>
+<li><a class="reference external" href="https://connect.ed-diamond.com/GNU-Linux-Magazine/GLMFHS-093/Journalisez-les-actions-de-vos-utilisateurs-avec-Auditd">connect.ed-diamond.com</a></li>
+<li><a class="reference external" href="https://linux-audit.com/configuring-and-auditing-linux-systems-with-audit-daemon/">linux-audit.com</a></li>
 </ul>
 </div>
 <div class="section" id="procedures">
-<h2>Procédures<a class="headerlink" href="#procedures" title="Lien permanent vers ce titre">¶</a></h2>
-<p>Installons les paquets nécessaires au bon fonctionnement d”auditd :</p>
+<h2>Procédures<a class="headerlink" href="#procedures" title="Permalink to this headline">¶</a></h2>
+<p>Installons les paquets nécessaires au bon fonctionnement d’auditd :</p>
 <p><img alt="../_images/1_install_package.PNG" src="../_images/1_install_package.PNG" /></p>
-<p>Définissons ensuite les règles d”audit :</p>
+<p>Définissons ensuite les règles d’audit :</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">## First rule - delete all</span>
 <span class="o">-</span><span class="n">D</span>
 
@@ -490,7 +491,7 @@
 <p><img alt="../_images/4_show_appears_in_logs.PNG" src="../_images/4_show_appears_in_logs.PNG" /></p>
 </div>
 <div class="section" id="commentaires">
-<h2>Commentaires<a class="headerlink" href="#commentaires" title="Lien permanent vers ce titre">¶</a></h2>
+<h2>Commentaires<a class="headerlink" href="#commentaires" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
@@ -500,8 +501,8 @@
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="audit_lynis.html" class="btn btn-neutral float-right" title="Audit Lynis" accesskey="n" rel="next">Suivant <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="desactivation_magickeys.html" class="btn btn-neutral float-left" title="Désactivation des Magic keys" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
+        <a href="audit_lynis.html" class="btn btn-neutral float-right" title="Audit Lynis" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="rsyslog.html" class="btn btn-neutral float-left" title="Rsyslog" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>
@@ -515,11 +516,11 @@
     
     
     
-    Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
     
-    fourni par <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
         </div>
