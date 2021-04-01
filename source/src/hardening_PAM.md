@@ -5,6 +5,7 @@ PAM est un élément central de notre système Linux, gérant les authentificati
 ## Classification
 
 * Niveau ANSSI : minimal
+* Principes : Défence en profondeur
 * Authentification
 * Gestion des comptes
 * Double authentification
