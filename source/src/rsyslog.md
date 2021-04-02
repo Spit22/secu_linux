@@ -62,7 +62,7 @@ Nous devons maintenant faire quelques changements de configuration sur notre ser
 
 Tout d'abord on va modifier le fichier `/etc/rsyslog.conf` en rajoutant les lignes suivantes :
 
-![](img/rsyslog/conf_rsyslog_serv 2.PNG)
+![](img/rsyslog/conf_rsyslog_serv_2.PNG)
 
 Le premier élément permet de limiter les clients envoyant des logs à notre seul node.
 Ensuite, les deux lignes suivantes nous permettent de stocker les logs dans un dossier spécifique pour chaque host envoyant des logs, afin de les séparer des logs propres au serveur.
