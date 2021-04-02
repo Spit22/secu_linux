@@ -35,6 +35,16 @@
    :caption: Niveau renforcé ANSSI
 
    src/auditd
+   src/fail2ban
+
+
+=============================================
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Niveau élevé ANSSI
+
+   src/apparmor
 
 
 =============================================

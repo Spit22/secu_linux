@@ -1,0 +1,513 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Mise en place de AppArmor &mdash; Sécurité Linux v1.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Audit Lynis" href="audit_lynis.html" />
+    <link rel="prev" title="Auditd" href="auditd.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Sécurité Linux
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Niveau minimal ANSSI</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Procédure d’installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hardening_PAM.html">Hardening PAM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="application_correctifs.html">Applications des correctifs</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Niveau intermédiaire ANSSI</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="parefeu_local.html">Parefeu local</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hardening_openssh.html">Hardening de OpenSSH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="confinement_droits_sudo.html">Confinement des droits sudo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hardening_grub.html">Hardening de Grub</a></li>
+<li class="toctree-l1"><a class="reference internal" href="desactivation_magickeys.html">Désactivation des Magic keys</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rsyslog.html">Rsyslog</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Niveau renforcé ANSSI</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="auditd.html">Auditd</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Niveau élevé ANSSI</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Mise en place de AppArmor</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#classification">Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sources">Sources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#procedures">Procédures</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#installation-de-l-outil">Installation de l’outil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#installation-des-profils-developpes-par-la-communaute">Installation des profils développés par la communauté</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#creation-d-un-profil-pour-une-application">Création d’un profil pour une application</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#notes-importantes">Notes importantes</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Audits de sécurité</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="audit_lynis.html">Audit Lynis</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Sécurité Linux</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Mise en place de AppArmor</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/src/apparmor.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="mise-en-place-de-apparmor">
+<h1>Mise en place de AppArmor<a class="headerlink" href="#mise-en-place-de-apparmor" title="Permalink to this headline">¶</a></h1>
+<p>Nous allons mettre en place un mécanisme de contrôle d’accès obligatoire. En quelques mots, AppArmor permet d’autoriser ou non des appels au noyau pour un applicatif donné. On pourra ainsi par exemple autoriser l’exécution du <em>mount</em> sur un répertoire spécifique, et interdire son exécution sur le reste du système.</p>
+<div class="section" id="classification">
+<h2>Classification<a class="headerlink" href="#classification" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Niveau ANSSI : élevé</p></li>
+<li><p>Défense en profondeur</p></li>
+<li><p>Confinement des applicatifs</p></li>
+<li><p>Mandatory Access Control</p></li>
+</ul>
+</div>
+<div class="section" id="sources">
+<h2>Sources<a class="headerlink" href="#sources" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.ssi.gouv.fr/uploads/2016/01/linux_configuration-fr-v1.2.pdf">ANSSI</a></p></li>
+<li><p><a class="reference external" href="https://debian-handbook.info/browse/fr-FR/stable/sect.apparmor.html">Debian Handbook</a></p></li>
+</ul>
+</div>
+<div class="section" id="procedures">
+<h2>Procédures<a class="headerlink" href="#procedures" title="Permalink to this headline">¶</a></h2>
+<p>L’objectif de ces procédure est de montrer comment ajouter de la sécurité à notre système à l’aide d’AppArmor. Il est important de noter que toute application exposée au réseau devrait avoir un profil AppArmor qui lui est propre.</p>
+<div class="section" id="installation-de-l-outil">
+<h3>Installation de l’outil<a class="headerlink" href="#installation-de-l-outil" title="Permalink to this headline">¶</a></h3>
+<p>AppArmor vient par défaut sur un set de distributions unix. On peut alors vérifier que ce dernier est bien exécuté sur notre machine :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>bastien@debiansecu:~$ cat /sys/module/apparmor/parameters/enabled
+Y
+</pre></div>
+</div>
+<p>Malgré le fait que AppArmor soit installé par défaut, les outils de gestion de ce dernier ne sont pas inclus dans le même package. Il faut donc installer des outils d’administration d’AppArmor supplémentaires :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>bastien@debiansecu:~$ sudo apt install apparmor-utils
+Lecture des listes de paquets... Fait
+Construction de l&#39;arbre des dépendances
+Lecture des informations d&#39;état... Fait
+Le paquet suivant a été installé automatiquement et n&#39;est plus nécessaire :
+  linux-image-4.19.0-6-amd64
+Veuillez utiliser « sudo apt autoremove » pour le supprimer.
+Les paquets supplémentaires suivants seront installés :
+  python3-apparmor python3-libapparmor
+Paquets suggérés :
+  vim-addon-manager
+Les NOUVEAUX paquets suivants seront installés :
+  apparmor-utils python3-apparmor python3-libapparmor
+0 mis à jour, 3 nouvellement installés, 0 à enlever et 0 non mis à jour.
+Il est nécessaire de prendre 344 ko dans les archives.
+Après cette opération, 971 ko d&#39;espace disque supplémentaires seront utilisés.
+Souhaitez-vous continuer ? [O/n]
+</pre></div>
+</div>
+</div>
+<div class="section" id="installation-des-profils-developpes-par-la-communaute">
+<h3>Installation des profils développés par la communauté<a class="headerlink" href="#installation-des-profils-developpes-par-la-communaute" title="Permalink to this headline">¶</a></h3>
+<p>Peut d’applicatifs intègrent par défaut un profil AppArmor.
+La communauté ayant déjà développé un certain nombre de profils, nous allons les installer :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>bastien@debiansecu:~$ sudo apt install apparmor-profiles-extra
+Lecture des listes de paquets... Fait
+Construction de l&#39;arbre des dépendances
+Lecture des informations d&#39;état... Fait
+
+Les NOUVEAUX paquets suivants seront installés :
+  apparmor-profiles-extra
+0 mis à jour, 1 nouvellement installés, 0 à enlever et 0 non mis à jour.
+Il est nécessaire de prendre 9 828 o dans les archives.
+Après cette opération, 43,0 ko d&#39;espace disque supplémentaires seront utilisés.
+Réception de :1 http://deb.debian.org/debian buster/main amd64 apparmor-profiles-extra all 1.26 [9 828 B]
+</pre></div>
+</div>
+<p>On peut ensuite lister les profils acitfs sur la machine :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>bastien@debiansecu:~$ sudo aa-status
+apparmor module is loaded.
+13 profiles are loaded.
+12 profiles are in enforce mode.
+   /usr/bin/man
+   /usr/bin/pidgin
+   /usr/bin/pidgin//sanitized_helper
+   /usr/bin/totem
+   /usr/bin/totem-audio-preview
+   /usr/bin/totem-video-thumbnailer
+   /usr/bin/totem//sanitized_helper
+   /usr/sbin/apt-cacher-ng
+   man_filter
+   man_groff
+   nvidia_modprobe
+   nvidia_modprobe//kmod
+1 profiles are in complain mode.
+   /usr/bin/irssi
+0 processes have profiles defined.
+0 processes are in enforce mode.
+0 processes are in complain mode.
+0 processes are unconfined but have a profile defined.
+</pre></div>
+</div>
+</div>
+<div class="section" id="creation-d-un-profil-pour-une-application">
+<h3>Création d’un profil pour une application<a class="headerlink" href="#creation-d-un-profil-pour-une-application" title="Permalink to this headline">¶</a></h3>
+<p>En exécutant la commande suivante, on peut lister les applications ayant accès une interface réseau mais qui ne sont pas confinées dans AppArmor.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>bastien@debiansecu:~$ sudo aa-unconfined --paranoid
+1 /usr/lib/systemd/systemd (/lib/systemd/systemd) not confined
+377 /usr/sbin/cron not confined
+379 /usr/bin/dbus-daemon not confined
+383 /usr/lib/systemd/systemd-logind (deleted) (/lib/systemd/systemd-logind) not confined
+446 /usr/bin/login (/bin/login) not confined
+452 /usr/lib/systemd/systemd (deleted) (/lib/systemd/systemd) not confined
+453 /usr/lib/systemd/systemd (deleted) not confined
+458 /usr/bin/bash (-bash) not confined
+960 /usr/sbin/rsyslogd not confined
+8828 /usr/bin/python3.7 (deleted) (/usr/bin/python3) not confined
+9210 /usr/lib/systemd/systemd-udevd (/lib/systemd/systemd-udevd) not confined
+14104 /usr/lib/systemd/systemd-timesyncd (/lib/systemd/systemd-timesyncd) not confined
+14107 /usr/lib/systemd/systemd-journald (/lib/systemd/systemd-journald) not confined
+20973 /usr/sbin/sshd not confined
+24277 /usr/sbin/auditd (/sbin/auditd) not confined
+26216 /usr/sbin/sshd not confined
+26223 /usr/lib/systemd/systemd (/lib/systemd/systemd) not confined
+26224 /usr/lib/systemd/systemd not confined
+26232 /usr/sbin/sshd (sshd: bastien@pts/0) not confined
+26233 /usr/bin/bash (-bash) not confined
+26504 /usr/bin/sudo not confined
+26505 /usr/bin/python3.7 (/usr/bin/python3) not confined
+</pre></div>
+</div>
+<p>Dans la mesure où le seul service présent en écoute sur un port sur notre machine est SSH, nous allons créer un profil pour ce dernier :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>bastien@debiansecu:~$ cat /etc/apparmor.d/usr.sbin.sshd
+#include &lt;tunables/global&gt;
+
+/usr/sbin/sshd {
+  #include &lt;abstractions/authentication&gt;
+  #include &lt;abstractions/base&gt;
+  #include &lt;abstractions/consoles&gt;
+  #include &lt;abstractions/nameservice&gt;
+  #include &lt;abstractions/wutmp&gt;
+
+  # Set authorized linux capabilities
+  capability audit_control,
+  capability chown,
+  capability dac_override,
+  capability fowner,
+  capability fsetid,
+  capability kill,
+  capability net_bind_service,
+  capability setgid,
+  capability setuid,
+  capability sys_chroot,
+  capability sys_resource,
+  capability sys_tty_config,
+
+  # Set DAC on some files 
+  /bin/ash rUx,
+  /bin/bash rUx,
+  /bin/bash2 rUx,
+  /bin/bsh rUx,
+  /bin/csh rUx,
+  /bin/ksh rUx,
+  /bin/sh rUx,
+  /bin/tcsh rUx,
+  /bin/zsh rUx,
+  /dev/ptmx rw,
+  /dev/pts/[0-9]* rw,
+  /dev/urandom r,
+  /etc/** r,
+  /proc/*/oom_adj rw,
+  /proc/*/oom_score_adj rw,
+  /sbin/nologin rUx,
+  /tmp/ssh-*/agent.[0-9]* rwl,
+  /tmp/ssh-*[0-9]*/ w,
+  /usr/sbin/sshd mrix,
+  /var/log/* rw,
+  /{,var/}run w,
+  /{,var/}run/sshd{,.init}.pid wl,
+  @{HOME}/.ssh/authorized_keys{,2} r,
+  @{PROC}/[0-9]*/fd/ r,
+  @{PROC}/[0-9]*/loginuid w,
+  @{PROC}/[0-9]*/mounts r,
+
+  # When trying ssh to authenticate to the host
+  ^AUTHENTICATED {
+    #include &lt;abstractions/authentication&gt;
+    #include &lt;abstractions/consoles&gt;
+    #include &lt;abstractions/nameservice&gt;
+    #include &lt;abstractions/wutmp&gt;
+
+    capability setgid,
+    capability setuid,
+    capability sys_tty_config,
+
+
+    /dev/log w,
+    /dev/ptmx rw,
+    /etc/default/passwd r,
+    /etc/localtime r,
+    /etc/login.defs r,
+    /etc/motd r,
+    /tmp/ssh-*/agent.[0-9]* rwl,
+    /tmp/ssh-*[0-9]*/ w,
+
+  }
+
+  # When ssh is attempting to execute a command
+  ^EXEC {
+    #include &lt;abstractions/base&gt;
+
+
+    /bin/ash Ux,
+    /bin/bash Ux,
+    /bin/bash2 Ux,
+    /bin/bsh Ux,
+    /bin/csh Ux,
+    /bin/ksh Ux,
+    /bin/sh Ux,
+    /bin/tcsh Ux,
+    /bin/zsh Ux,
+    /sbin/nologin Ux,
+
+  }
+  
+  # Privilege separation process
+  ^PRIVSEP {
+    #include &lt;abstractions/base&gt;
+    #include &lt;abstractions/nameservice&gt;
+
+    capability setgid,
+    capability setuid,
+    capability sys_chroot,
+
+
+
+  }
+  # Privilege separation monitoring process
+  ^PRIVSEP_MONITOR {
+    #include &lt;abstractions/authentication&gt;
+    #include &lt;abstractions/base&gt;
+    #include &lt;abstractions/nameservice&gt;
+    #include &lt;abstractions/wutmp&gt;
+
+    capability chown,
+    capability setgid,
+    capability setuid,
+
+
+    /dev/ptmx rw,
+    /dev/pts/[0-9]* rw,
+    /dev/urandom r,
+    /etc/hosts.allow r,
+    /etc/hosts.deny r,
+    /etc/ssh/moduli r,
+    @{HOME}/.ssh/authorized_keys{,2} r,
+    @{PROC}/[0-9]*/mounts r,
+
+  }
+}
+</pre></div>
+</div>
+<p>On peut ensuite activer ce profile en mode enforce avec la commande suivante :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>bastien@debiansecu:~$ sudo aa-enforce sshd
+Setting /usr/sbin/sshd to enforce mode.
+</pre></div>
+</div>
+<p>Et chaque fois qu’on effectue une modification sur le fichier, il suffit de lancer apparmor pour qu’il reload la rule :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>bastien@debiansecu:~$ sudo apparmor_parser -r /etc/apparmor.d/usr.sbin.sshd
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="notes-importantes">
+<h2>Notes importantes<a class="headerlink" href="#notes-importantes" title="Permalink to this headline">¶</a></h2>
+<p>Pour chaque nouvelle règle, il est important de vérifier que le service ciblé fonctionne toujours comme prévu. En effet, apparmor agissant sur une couche très basse (niveau noyau), il est parfois compliqué de gégner des profils apparmor qui prennent en compte tous les cas d’utilisation.
+Dans certains cas, il est possible de se simplifier la vie en utilisant la commande suivante :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ aa-genproof /usr/sbin/sshd
+</pre></div>
+</div>
+<p>En effet, cette commande sert à générer un profil pour un binaire donné, en adaptant ses règles aux logs générés par l’application. On peut donc dire à apparmor d’analyser le service, et si en parrallèle on utilise ce même service, apparmor devrait prendre en compte un nombre important de cas d’usage.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="audit_lynis.html" class="btn btn-neutral float-right" title="Audit Lynis" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="auditd.html" class="btn btn-neutral float-left" title="Auditd" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Bastien SECHER - Olivier CUREAU - Mael FANJOUX.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

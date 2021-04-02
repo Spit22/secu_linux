@@ -35,6 +35,7 @@
    :caption: Niveau renforcé ANSSI
 
    src/auditd
+   src/fail2ban
 
 
 =============================================

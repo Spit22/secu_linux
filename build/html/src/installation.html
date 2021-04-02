@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
   
@@ -29,10 +29,9 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -110,6 +109,10 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="auditd.html">Auditd</a></li>
 </ul>
+<p class="caption"><span class="caption-text">Niveau élevé ANSSI</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="apparmor.html">Mise en place de AppArmor</a></li>
+</ul>
 <p class="caption"><span class="caption-text">Audits de sécurité</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="audit_lynis.html">Audit Lynis</a></li>
@@ -185,21 +188,22 @@
 <div class="section" id="classification">
 <h2>Classification<a class="headerlink" href="#classification" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Installation</li>
-<li>Chiffrement de disque</li>
+<li><p>Principes : Minimisation</p></li>
+<li><p>Installation</p></li>
+<li><p>Chiffrement de disque</p></li>
 </ul>
 </div>
 <div class="section" id="sources">
 <h2>Sources<a class="headerlink" href="#sources" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><a class="reference external" href="https://www.ssi.gouv.fr/uploads/2016/01/linux_configuration-fr-v1.2.pdf">ANSSI</a></li>
-<li><a class="reference external" href="https://www.debian.org/doc/manuals/debian-handbook/">Debian Administrator Handbook</a></li>
-<li>Moodle</li>
+<li><p><a class="reference external" href="https://www.ssi.gouv.fr/uploads/2016/01/linux_configuration-fr-v1.2.pdf">ANSSI</a></p></li>
+<li><p><a class="reference external" href="https://www.debian.org/doc/manuals/debian-handbook/">Debian Administrator Handbook</a></p></li>
+<li><p>Moodle</p></li>
 </ul>
 </div>
 <div class="section" id="procedures">
 <h2>Procédures<a class="headerlink" href="#procedures" title="Permalink to this headline">¶</a></h2>
-<p>Définissons un motde passe robuste pour l’utilisateur root</p>
+<p>Définissons un mot de passe robuste pour l’utilisateur root</p>
 <p><img alt="../_images/mdp_root.png" src="../_images/mdp_root.png" /></p>
 <p>Créons ensuite un utilisateur nommé olivier :</p>
 <p><img alt="../_images/creation_olivier.png" src="../_images/creation_olivier.png" /></p>
@@ -211,7 +215,7 @@
 <p><img alt="../_images/mdp_chiffrement_disque.png" src="../_images/mdp_chiffrement_disque.png" /></p>
 <p>Fixons la taille maximale pour notre unique partition :</p>
 <p><img alt="../_images/choix_taille_partition.png" src="../_images/choix_taille_partition.png" /></p>
-<p>On choisit d’utiliser les 8Go pour la partition root, et de n’affecter aucun SWAP. En effet, la machine virtuelle créée possède 4Go RAM, ce qui ne sera jamais dépassé pour notre utilisation.</p>
+<p>On choisit d’utiliser les 8Go pour la partition root, et de n’affecter aucun SWAP. En effet, la machine virtuelle créée possède 4Go RAM, ce qui ne sera jamais dépassé pour notre utilisation. Cependant, il est conseillé, sauf cas spécifique, de toujours laisser une partition SWAP. En effet, l’absence de cette dernière pourrait causer des erreurs lors de l’execution de certains programmes.</p>
 <p>Voici le résumé du partitionnement :</p>
 <p><img alt="../_images/resume_partition.png" src="../_images/resume_partition.png" /></p>
 <p><img alt="../_images/choix_miroir.png" src="../_images/choix_miroir.png" /></p>

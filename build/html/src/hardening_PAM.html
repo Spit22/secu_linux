@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
   
@@ -29,10 +29,9 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -93,8 +92,8 @@
 <li class="toctree-l2"><a class="reference internal" href="#sources">Sources</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#procedures">Procédures</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#desactivation-du-compte-root">Désactivation du compte root</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#contres-mesures-bruteforce">Contres mesures bruteforce</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#politiques-de-password">Politiques de password</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#contres-mesures-contre-le-bruteforce">Contres mesures contre le bruteforce</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#politiques-de-complexite-des-mots-de-passe">Politiques de complexité des mots de passe</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#double-authentification">Double authentification</a></li>
 </ul>
 </li>
@@ -115,6 +114,10 @@
 <p class="caption"><span class="caption-text">Niveau renforcé ANSSI</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="auditd.html">Auditd</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Niveau élevé ANSSI</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="apparmor.html">Mise en place de AppArmor</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Audits de sécurité</span></p>
 <ul>
@@ -192,17 +195,19 @@
 <div class="section" id="classification">
 <h2>Classification<a class="headerlink" href="#classification" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Niveau ANSSI : minimal</li>
-<li>Authentification</li>
-<li>Gestion des comptes</li>
-<li>Double authentification</li>
+<li><p>Niveau ANSSI : minimal</p></li>
+<li><p>Principes : Défence en profondeur</p></li>
+<li><p>Authentification</p></li>
+<li><p>Gestion des comptes</p></li>
+<li><p>Double authentification</p></li>
+<li><p>Défense en profondeur</p></li>
 </ul>
 </div>
 <div class="section" id="sources">
 <h2>Sources<a class="headerlink" href="#sources" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><a class="reference external" href="https://www.ssi.gouv.fr/uploads/2016/01/linux_configuration-fr-v1.2.pdf">ANSSI</a></li>
-<li><a class="reference external" href="https://www.vultr.com/docs/how-to-setup-two-factor-authentication-2fa-for-ssh-on-debian-9-using-google-authenticator">2FA</a></li>
+<li><p><a class="reference external" href="https://www.ssi.gouv.fr/uploads/2016/01/linux_configuration-fr-v1.2.pdf">ANSSI</a></p></li>
+<li><p><a class="reference external" href="https://www.vultr.com/docs/how-to-setup-two-factor-authentication-2fa-for-ssh-on-debian-9-using-google-authenticator">2FA</a></p></li>
 </ul>
 </div>
 <div class="section" id="procedures">
@@ -211,10 +216,10 @@
 <p><img alt="../_images/install_libpam.PNG" src="../_images/install_libpam.PNG" /></p>
 <div class="section" id="desactivation-du-compte-root">
 <h3>Désactivation du compte root<a class="headerlink" href="#desactivation-du-compte-root" title="Permalink to this headline">¶</a></h3>
-<p>Le but de cette étapes est de bloquer l’accès au compte root. Pour cela, nous allons utiliser deux mécanismes :</p>
+<p>Le but de cette étape est de bloquer l’accès au compte root. Pour cela, nous allons utiliser deux mécanismes :</p>
 <ul class="simple">
-<li>interdiction au groupe <em>wheel</em> (groupe que nous allons créer pour les superutilisateurs) de se connecter en tant que root</li>
-<li>désactivation du shell de l’utilisateur root</li>
+<li><p>interdiction au groupe <em>wheel</em> (groupe que nous allons créer pour les superutilisateurs) de se connecter en tant que root</p></li>
+<li><p>désactivation du shell de l’utilisateur root</p></li>
 </ul>
 <p>Le groupe <em>wheel</em> est l’équivalent du groupe <em>sudo</em> chez RedHat.</p>
 <p>Commençons par créer le groupe <em>wheel</em> :</p>
@@ -226,30 +231,36 @@
 <p>Désactivons enfin le shell de l’utilisateur root :</p>
 <p><img alt="../_images/disable_root.PNG" src="../_images/disable_root.PNG" /></p>
 </div>
-<div class="section" id="contres-mesures-bruteforce">
-<h3>Contres mesures bruteforce<a class="headerlink" href="#contres-mesures-bruteforce" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="contres-mesures-contre-le-bruteforce">
+<h3>Contres mesures contre le bruteforce<a class="headerlink" href="#contres-mesures-contre-le-bruteforce" title="Permalink to this headline">¶</a></h3>
 <p>Limitons le nombre de tentative d’authentification :</p>
 <p><img alt="../_images/bruteforce_pass_sshd.PNG" src="../_images/bruteforce_pass_sshd.PNG" /></p>
 <p><img alt="../_images/bruteforce_pass_login.PNG" src="../_images/bruteforce_pass_login.PNG" /></p>
+<p>Le choix de bloquer pendant <strong>10 minutes</strong> au bout de <strong>5 authentifications échouées</strong> nous semble être un bon compromis entre le fait d’éviter de bloquer un utilisateur qui se serait trompé de mots de passe, et une réelle attaque par Bruteforce.</p>
 </div>
-<div class="section" id="politiques-de-password">
-<h3>Politiques de password<a class="headerlink" href="#politiques-de-password" title="Permalink to this headline">¶</a></h3>
-<p>Définissons une politique de password pour forcer les utilisateurs à respecter les bonnes pratiques de sécurité</p>
+<div class="section" id="politiques-de-complexite-des-mots-de-passe">
+<h3>Politiques de complexité des mots de passe<a class="headerlink" href="#politiques-de-complexite-des-mots-de-passe" title="Permalink to this headline">¶</a></h3>
+<p>Définissons une politique de password pour forcer les utilisateurs à respecter les bonnes pratiques de sécurité.</p>
 <p><img alt="../_images/password_policy.PNG" src="../_images/password_policy.PNG" /></p>
+<p>Dans cette politique, on demande à avoir au moins 16 caractères dans le mot de passe, et qu’il contienne au moins un mélange de chiffres, de lettres et de majuscules. Cette politique est cohérente avec les recommandations de l’ANSSI. Nous ne souhaitons pas forcer l’usage de caractères spéciaux, puisqu’ils peuvent être sujet à erreur en fonctions des claviers ou des encodages utilisés.</p>
 <p>Testons cette politique :</p>
 <p><img alt="../_images/password_policy_poc.PNG" src="../_images/password_policy_poc.PNG" /></p>
 <p>Définissons enfin une politique de stockage des mots de passe forte :</p>
 <p><img alt="../_images/common-password.PNG" src="../_images/common-password.PNG" /></p>
+<p>Avec un nombre de <em>round</em> particulièrement haut et l’usage de sha512, les mots de passe stockés ne devraient pas être sujet à du Brutefoce sur les empreintes.</p>
 </div>
 <div class="section" id="double-authentification">
 <h3>Double authentification<a class="headerlink" href="#double-authentification" title="Permalink to this headline">¶</a></h3>
-<p>Utilisons Google authentificator pour implémenter de la double authentification dans le PAM de notre système Linux :</p>
+<p>Une bonne pratique est également de mettre en place la double authentification, pour éviter le cas où un attaquant pourrait se connecter directement à la machine s’il connaissait le mot de passe de l’utilisateur. Cela ajoute une couche de sécurité supplémentaire et non négligeable.</p>
+<p>Utilisons Google authentificator pour implémenter de la double authentification dans le PAM de notre système Linux. On commence par installer la librairie qui va bien :</p>
 <p><img alt="../_images/1_install_google_auth.PNG" src="../_images/1_install_google_auth.PNG" /></p>
+<p>Puis on exécute google-authenticator pour générer un token :</p>
 <p><img alt="../_images/2_configure_google_auth.PNG" src="../_images/2_configure_google_auth.PNG" /></p>
-<p>Configurons PAM et sshd pour qu’il utilise Google authentificator :</p>
+<p>Configurons PAM et sshd pour qu’ils utilisent Google authentificator :</p>
 <p><img alt="../_images/3_configure_pam.PNG" src="../_images/3_configure_pam.PNG" /></p>
+<p>Et dans /etc/ssh/sshd-config</p>
 <p><img alt="../_images/3_configure_sshd.PNG" src="../_images/3_configure_sshd.PNG" /></p>
-<p>Vérifions que le mécanisme est fonctionel :</p>
+<p>Puis vérifions que le mécanisme est fonctionel :</p>
 <p><img alt="../_images/4_verification.PNG" src="../_images/4_verification.PNG" /></p>
 </div>
 </div>

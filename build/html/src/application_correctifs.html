@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
   
@@ -29,10 +29,9 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -115,6 +114,10 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="auditd.html">Auditd</a></li>
 </ul>
+<p class="caption"><span class="caption-text">Niveau élevé ANSSI</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="apparmor.html">Mise en place de AppArmor</a></li>
+</ul>
 <p class="caption"><span class="caption-text">Audits de sécurité</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="audit_lynis.html">Audit Lynis</a></li>
@@ -191,32 +194,37 @@
 <div class="section" id="classification">
 <h2>Classification<a class="headerlink" href="#classification" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Niveau ANSSI : intermédiaire</li>
-<li>Mises à jour</li>
-<li>Patchs de sécurité</li>
-<li>Automatisation</li>
+<li><p>Niveau ANSSI : intermédiaire</p></li>
+<li><p>Mises à jour</p></li>
+<li><p>Patchs de sécurité</p></li>
+<li><p>Automatisation</p></li>
+<li><p>Veille et maintenance</p></li>
 </ul>
 </div>
 <div class="section" id="sources">
 <h2>Sources<a class="headerlink" href="#sources" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><a class="reference external" href="https://www.ssi.gouv.fr/uploads/2016/01/linux_configuration-fr-v1.2.pdf">ANSSI</a></li>
-<li><a class="reference external" href="https://www.kanjian.fr/automatiser-mises-a-jour-de-serveur-debian.html#.YGGZxa8zaUl">unattended-upgrades</a></li>
+<li><p><a class="reference external" href="https://www.ssi.gouv.fr/uploads/2016/01/linux_configuration-fr-v1.2.pdf">ANSSI</a></p></li>
+<li><p><a class="reference external" href="https://www.kanjian.fr/automatiser-mises-a-jour-de-serveur-debian.html#.YGGZxa8zaUl">unattended-upgrades</a></p></li>
 </ul>
 </div>
 <div class="section" id="procedures">
 <h2>Procédures<a class="headerlink" href="#procedures" title="Permalink to this headline">¶</a></h2>
+<p>Pour automatiser la gestion des mises à jour, nous allons utiliser deux paquets debian : apt-listchanges (pour afficher les changelogs) et unattended-upgrades (pour mettre à jour les paquets automatiquement).</p>
 <div class="section" id="installation">
 <h3>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h3>
+<p>Les deux paquets peuvent être installés directement depuis apt :</p>
 <p><img alt="../_images/installation.PNG" src="../_images/installation.PNG" /></p>
 </div>
 <div class="section" id="configuration">
 <h3>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h3>
+<p>Nous allons configurer unattended-upgrades de manière à ce qu’il sache comment réagir en cas de demande de reboot par une màj, et on va lui dire de n’effecter que les mises à jour qui ont le tag Security :</p>
 <p><img alt="../_images/maj_for_security_only.PNG" src="../_images/maj_for_security_only.PNG" /></p>
 <p><img alt="../_images/disable_automatic_reboot.PNG" src="../_images/disable_automatic_reboot.PNG" /></p>
 </div>
 <div class="section" id="poc">
 <h3>PoC<a class="headerlink" href="#poc" title="Permalink to this headline">¶</a></h3>
+<p>Pour vérifier que l’outil marche comme prévu, on peut le lancer à la main en mode verbose, et il devrait nous retourner les configurations qu’il applique :</p>
 <p><img alt="../_images/maj_poc.PNG" src="../_images/maj_poc.PNG" /></p>
 </div>
 </div>

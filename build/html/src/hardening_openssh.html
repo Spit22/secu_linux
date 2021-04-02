@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
   
@@ -29,10 +29,9 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -114,6 +113,10 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="auditd.html">Auditd</a></li>
 </ul>
+<p class="caption"><span class="caption-text">Niveau élevé ANSSI</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="apparmor.html">Mise en place de AppArmor</a></li>
+</ul>
 <p class="caption"><span class="caption-text">Audits de sécurité</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="audit_lynis.html">Audit Lynis</a></li>
@@ -190,35 +193,44 @@
 <div class="section" id="classification">
 <h2>Classification<a class="headerlink" href="#classification" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Niveau ANSSI : intermédiaire</li>
-<li>Authentification</li>
-<li>Accès à distance</li>
+<li><p>Niveau ANSSI : intermédiaire</p></li>
+<li><p>Authentification</p></li>
+<li><p>Accès à distance</p></li>
+<li><p>Défense en profondeur</p></li>
 </ul>
 </div>
 <div class="section" id="sources">
 <h2>Sources<a class="headerlink" href="#sources" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><a class="reference external" href="https://www.ssi.gouv.fr/uploads/2016/01/linux_configuration-fr-v1.2.pdf">ANSSI</a></li>
-<li><a class="reference external" href="https://lecrabeinfo.net/se-connecter-en-ssh-par-echange-de-cles-ssh.html">LeCrabeInfo</a></li>
+<li><p><a class="reference external" href="https://www.ssi.gouv.fr/uploads/2016/01/linux_configuration-fr-v1.2.pdf">ANSSI</a></p></li>
+<li><p><a class="reference external" href="https://lecrabeinfo.net/se-connecter-en-ssh-par-echange-de-cles-ssh.html">LeCrabeInfo</a></p></li>
 </ul>
 </div>
 <div class="section" id="procedures">
 <h2>Procédures<a class="headerlink" href="#procedures" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="authentification-avec-cle-ssh">
 <h3>Authentification avec clé SSH<a class="headerlink" href="#authentification-avec-cle-ssh" title="Permalink to this headline">¶</a></h3>
-<p>L’authentification s’effectuera désormais avec une clé SSH :</p>
-<p><img alt="../_images/1_generate_ssh_key_for_auth.PNG" src="../_images/1_generate_ssh_key_for_auth.PNG" /></p>
+<p>Nous allons chercher à n’autoriser que les authentifications utilisant des clés SSH.
+On commence par générer une clé SSH, avec :</p>
+<ul class="simple">
+<li><p>utilisation du chiffrement rsa</p></li>
+<li><p>utilisation d’une clé de longueuyr 4096 (comme recommandé par l’ANSSI pour ce genre de clés)</p></li>
+<li><p>pour une clé servant à effectuer des tâches d’administration sensibles, une longueure de 8 128 est recommandée
+<img alt="../_images/1_generate_ssh_key_for_auth.PNG" src="../_images/1_generate_ssh_key_for_auth.PNG" /></p></li>
+</ul>
+<p>On envoie la clé de l’utilisateur sur notre serveur distant :</p>
 <p><img alt="../_images/2_deploy_key_on_remote_server.PNG" src="../_images/2_deploy_key_on_remote_server.PNG" /></p>
+<p>Et on peut alors se connectant en utilisant la clé :</p>
 <p><img alt="../_images/3_test_key_is_accepted.PNG" src="../_images/3_test_key_is_accepted.PNG" /></p>
 </div>
 <div class="section" id="configuration-de-sshd">
 <h3>Configuration de sshd<a class="headerlink" href="#configuration-de-sshd" title="Permalink to this headline">¶</a></h3>
 <p>La configuration du service ssh est également durcie :</p>
 <ul class="simple">
-<li>le port d’écoute du service a été modifié (le parefeu local a été modifié en conséquence)</li>
-<li>l’authentification en tant qu’utilisateur root a été interdite</li>
-<li>l’authentification par mot de passe a été interdite</li>
-<li>les mécanismes de chiffrement utilisées sont robustes</li>
+<li><p>le port d’écoute du service a été modifié (le parefeu local a été modifié en conséquence)</p></li>
+<li><p>l’authentification en tant qu’utilisateur root a été interdite</p></li>
+<li><p>l’authentification par mot de passe a été interdite</p></li>
+<li><p>les mécanismes de chiffrement utilisées sont robustes</p></li>
 </ul>
 <p><img alt="../_images/4_configuration_sshd_config_part1.PNG" src="../_images/4_configuration_sshd_config_part1.PNG" /></p>
 <p><img alt="../_images/4_configuration_sshd_config_part2.PNG" src="../_images/4_configuration_sshd_config_part2.PNG" /></p>
@@ -226,6 +238,7 @@
 </div>
 <div class="section" id="commentaires">
 <h2>Commentaires<a class="headerlink" href="#commentaires" title="Permalink to this headline">¶</a></h2>
+<p>De nombreuses autres améliorations auraient pu être ajoutées, notamment dans la configuration d’openSSH. Cependant, nous avons souhaité que la configuration soit applicable pour un usage simple, et donc nous avons évité d’avoir des règles trop restrictives, comme par exemple des whitelist d’ip.</p>
 </div>
 </div>
 

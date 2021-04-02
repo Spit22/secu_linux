@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
   
@@ -29,10 +29,9 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -103,6 +102,9 @@
 <li class="toctree-l2"><a class="reference internal" href="#sources">Sources</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#procedures">Procédures</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#generation-des-cles">Génération des clés</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configuration-du-serveur">Configuration du serveur</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configuration-du-client">Configuration du client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#verification">Vérification</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#commentaires">Commentaires</a></li>
@@ -112,6 +114,10 @@
 <p class="caption"><span class="caption-text">Niveau renforcé ANSSI</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="auditd.html">Auditd</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Niveau élevé ANSSI</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="apparmor.html">Mise en place de AppArmor</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Audits de sécurité</span></p>
 <ul>
@@ -188,35 +194,81 @@
 <div class="section" id="classification">
 <h2>Classification<a class="headerlink" href="#classification" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Niveau ANSSI : renforcé</li>
-<li>Journalisation</li>
+<li><p>Niveau ANSSI : renforcé</p></li>
+<li><p>Principes : Défense en profondeur, Veille et maintenance</p></li>
+<li><p>Journalisation</p></li>
 </ul>
 </div>
 <div class="section" id="sources">
 <h2>Sources<a class="headerlink" href="#sources" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><a class="reference external" href="https://www.ssi.gouv.fr/uploads/2016/01/linux_configuration-fr-v1.2.pdf">ANSSI</a></li>
-<li><a class="reference external" href="https://www.golinuxcloud.com/secure-remote-logging-rsyslog-tls-certificate/">golinuxcloud.com</a></li>
+<li><p><a class="reference external" href="https://www.ssi.gouv.fr/uploads/2016/01/linux_configuration-fr-v1.2.pdf">ANSSI</a></p></li>
+<li><p><a class="reference external" href="https://www.golinuxcloud.com/secure-remote-logging-rsyslog-tls-certificate/">golinuxcloud.com</a></p></li>
 </ul>
 </div>
 <div class="section" id="procedures">
 <h2>Procédures<a class="headerlink" href="#procedures" title="Permalink to this headline">¶</a></h2>
-<p>On veut que les flux syslog soient chiffrés :</p>
+<p>Nous allons nous intéresser ici aux étapes de configuration de la journalisation sécurisée avec rsyslog sur un serveur de journalisation distant à l’aide de certificats TLS.
+Ce document décrit donc un moyen sécurisé de configurer rsyslog (certificats TLS) pour transférer les journaux vers le serveur de journaux distant.
+Le simple chiffrement du canal de transmission n’est pas suffisant pour un environnement de journalisation sécurisé. Cependnat, voici quelques-uns des avantages de cette solution :</p>
+<ul class="simple">
+<li><p>les messages syslog sont chiffrés lors de leurs déplacements sur le fil</p></li>
+<li><p>l’expéditeur syslog s’authentifie auprès du serveur syslog; ainsi, ce dernier sait qui est l’expéditeur des logs.</p></li>
+<li><p>le serveur syslog s’authentifie auprès de l’expéditeur syslog; ainsi, l’expéditeur peut vérifier s’il envoie bien au destinataire attendu</p></li>
+<li><p>l’authentification mutuelle empêche en grande partie les attaques man-in-the-middle</p></li>
+</ul>
 <div class="section" id="generation-des-cles">
 <h3>Génération des clés<a class="headerlink" href="#generation-des-cles" title="Permalink to this headline">¶</a></h3>
-<p>Générons les clés privés pour le client et le serveur :</p>
+<p>Pour créer un certificat auto-signé afin d’obtenir une transmission sécurisée de syslog vers un serveur de journalisation distant, nous utiliserons certtool.
+Dans cette étape, nous générons des certificats pour chacune des machines, les clients et les serveurs ayant besoin de certificats. Le certificat identifie chaque machine auprès du pair distant.</p>
+<p>Générons la clé privée pour le client.</p>
 <p><img alt="../_images/key-generation.PNG" src="../_images/key-generation.PNG" /></p>
+<p>Cette clé a besoin des autorisations appropriées pour la rendre lisible par l’utilisateur root uniquement</p>
+<p><img alt="../_images/change_key_owner_and_permission.PNG" src="../_images/change_key_owner_and_permission.PNG" /></p>
+<p>Puis, nous faisons de même pour le serveur.</p>
 <p><img alt="../_images/generate_serv_key.PNG" src="../_images/generate_serv_key.PNG" /></p>
 <p>Générons ensuite une requête de certificat pour le serveur :</p>
 <p><img alt="../_images/generate_serv_certificates.PNG" src="../_images/generate_serv_certificates.PNG" /></p>
-<p>On créer enfin un certificat autosigné pour le client :</p>
+<p>On crée maintenant le certificat CA (auto-signé) lui-même. Cette commande interroge sur un certain nombre de choses. Il est nnécessaire de donner les réponses appropriées. En ce qui concerne la validité des certificats, gardez à l’esprit que vous devez recréer tous les certificats lorsque celui-ci expire. Il faut donc trouver le bon compromis en durée entre sécurité et praticité</p>
 <p><img alt="../_images/generate_self-signed_certificates.PNG" src="../_images/generate_self-signed_certificates.PNG" /></p>
-<p>Et un certificat signé avec la clé du client pour le serveur :</p>
+<p>Personne, à l’exception de l’autorité de certification elle-même, n’en a besoin. Si un tiers l’obtient, votre sécurité est brisée !</p>
+<p>Enfin, nous générons un certificat signé avec la clé du client pour le serveur :</p>
 <p><img alt="../_images/generate_signed_serv1_certificates.PNG" src="../_images/generate_signed_serv1_certificates.PNG" /></p>
+<p>Ensuite, nous devons copier ces clés (certificats) sur notre nœud distant. Pour cela, nous pouvons utiliser <code class="docutils literal notranslate"><span class="pre">scp</span></code>.</p>
+</div>
+<div class="section" id="configuration-du-serveur">
+<h3>Configuration du serveur<a class="headerlink" href="#configuration-du-serveur" title="Permalink to this headline">¶</a></h3>
+<p>Nous devons maintenant faire quelques changements de configuration sur notre serveur de journalisation distant pour recevoir des messages de notre client via TCP en utilisant des certificats TLS.</p>
+<p>Tout d’abord on va modifier le fichier <code class="docutils literal notranslate"><span class="pre">/etc/rsyslog.conf</span></code> en rajoutant les lignes suivantes :</p>
+<p><img alt="../_images/conf_rsyslog_serv_2.PNG" src="../_images/conf_rsyslog_serv_2.PNG" /></p>
+<p>Le premier élément permet de limiter les clients envoyant des logs à notre seul node.
+Ensuite, les deux lignes suivantes nous permettent de stocker les logs dans un dossier spécifique pour chaque host envoyant des logs, afin de les séparer des logs propres au serveur.</p>
+<p>Ensuite, on crée un nouveau fichier <code class="docutils literal notranslate"><span class="pre">/etc/rsyslog.d/logserver.conf</span></code> dont voici le contenu.</p>
+<p><img alt="../_images/server_rsyslog_conf.PNG" src="../_images/server_rsyslog_conf.PNG" /></p>
+<p>Ensuite, il est nécessaire d’installer le module <code class="docutils literal notranslate"><span class="pre">rsyslog-gnutls</span></code>. Puisque nous utilisons le pilote GTLS, ce module doit être installé à la fois sur le nœud client et serveur. Puis, on redémarre ensuite le service rsyslog.</p>
+<p>Donc, notre configuration côté serveur est terminée, passons du côté client pour terminer notre journalisation à distance sécurisée.</p>
+</div>
+<div class="section" id="configuration-du-client">
+<h3>Configuration du client<a class="headerlink" href="#configuration-du-client" title="Permalink to this headline">¶</a></h3>
+<p>Maintenant, configurons notre client pour transférer les journaux en toute sécurité vers notre serveur de journaux distant.</p>
+<p>Pour cela, après avoir installé le module <code class="docutils literal notranslate"><span class="pre">rsyslog-gnutls</span></code>, nous allons créer un nouveau fichier à l’intérieur <code class="docutils literal notranslate"><span class="pre">/etc/rsyslog.d</span></code> dont voici le contenu.</p>
+<p><img alt="../_images/conf_rsyslog_client.PNG" src="../_images/conf_rsyslog_client.PNG" /></p>
+<p>Cela transmettra chaque message syslog à votre serveur de journalisation distant.</p>
+<p>Nous avons tous terminé, il suffit maintenant de redémarrer le service rsyslog et vérifiez l’état.</p>
+</div>
+<div class="section" id="verification">
+<h3>Vérification<a class="headerlink" href="#verification" title="Permalink to this headline">¶</a></h3>
+<p>Maintenant, nous allons essayer d’envoyer un message factice de notre serveur à notre client et vérifier notre configuration.</p>
+<p><img alt="../_images/poc_client.PNG" src="../_images/poc_client.PNG" /></p>
+<p>On vérifie maintenant le syslog sur le serveur.</p>
+<p><img alt="../_images/poc_serv.PNG" src="../_images/poc_serv.PNG" /></p>
+<p>Et nous avons reçu le message comme prévu, donc tout semble fonctionner correctement.</p>
 </div>
 </div>
 <div class="section" id="commentaires">
 <h2>Commentaires<a class="headerlink" href="#commentaires" title="Permalink to this headline">¶</a></h2>
+<p>Cette solution nécessitant l’utilisation de TCP et un chiffrement via TLS, son coût est beaucoup plus élevé qu’un simple envoie de logs via UDP.
+Par conséquent, si le volume de log est trop important, ce système ne pourra sans doute pas être appliqué dû à son débit fortement réduit comparé à d’autres moyens.</p>
 </div>
 </div>
 

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Parefeu local &mdash; Sécurité Linux v1.0 documentation</title>
+  <title>Fail2ban &mdash; Sécurité Linux v1.0 documentation</title>
   
 
   
@@ -37,9 +37,7 @@
 
     
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Hardening de OpenSSH" href="hardening_openssh.html" />
-    <link rel="prev" title="Applications des correctifs" href="application_correctifs.html" /> 
+    <link rel="search" title="Search" href="../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -91,20 +89,8 @@
 <li class="toctree-l1"><a class="reference internal" href="application_correctifs.html">Applications des correctifs</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Niveau intermédiaire ANSSI</span></p>
-<ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Parefeu local</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#classification">Classification</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#sources">Sources</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#procedures">Procédures</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#mise-en-place-du-parefeu-local">Mise en place du parefeu local</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#test-du-parefeu-local">Test du parefeu local</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#alternative-nftable">Alternative : nftable</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#amelioration-du-parefeu-local">Amélioration du parefeu local</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#commentaires">Commentaires</a></li>
-</ul>
-</li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="parefeu_local.html">Parefeu local</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hardening_openssh.html">Hardening de OpenSSH</a></li>
 <li class="toctree-l1"><a class="reference internal" href="confinement_droits_sudo.html">Confinement des droits sudo</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hardening_grub.html">Hardening de Grub</a></li>
@@ -170,13 +156,13 @@
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Parefeu local</li>
+      <li>Fail2ban</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/src/parefeu_local.md.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/src/fail2ban.md.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -189,72 +175,89 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="parefeu-local">
-<h1>Parefeu local<a class="headerlink" href="#parefeu-local" title="Permalink to this headline">¶</a></h1>
-<p>-classification (niveau ANSSI,type de mesure,  …)
--sources
--procédures
--commentaires (résultat, mesure écartée, conservée, adaptée,…)</p>
+  <div class="section" id="fail2ban">
+<h1>Fail2ban<a class="headerlink" href="#fail2ban" title="Permalink to this headline">¶</a></h1>
+<p>L’outil <strong>fail2ban</strong> va nous permettre de bannir certaines machines qui essayerais de bruteforce l’authentification sur notre système Linux.</p>
 <div class="section" id="classification">
 <h2>Classification<a class="headerlink" href="#classification" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>Niveau ANSSI : intermédiaire</p></li>
-<li><p>Gestion des flux</p></li>
-<li><p>Minimisation</p></li>
+<li><p>Principes : Défense en profondeur</p></li>
+<li><p>Authentification</p></li>
 </ul>
 </div>
 <div class="section" id="sources">
 <h2>Sources<a class="headerlink" href="#sources" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://www.ssi.gouv.fr/uploads/2016/01/linux_configuration-fr-v1.2.pdf">ANSSI</a></p></li>
+<li><p><a class="reference external" href="https://doc.ubuntu-fr.org/fail2ban">Doc Ubuntu</a></p></li>
 </ul>
 </div>
 <div class="section" id="procedures">
 <h2>Procédures<a class="headerlink" href="#procedures" title="Permalink to this headline">¶</a></h2>
-<p>Voici une première version du script iptables que nous allons appliquer sur le serveur. Ses caractéristiques sont :</p>
-<ul class="simple">
-<li><p>Les flux entrants sont <strong>bloqués</strong> par défaut</p></li>
-<li><p>Les flux sortants sont <strong>bloqués</strong> par défaut</p></li>
-<li><p>Les flux entrants sur le port SSH sont <strong>autorisés</strong></p></li>
-<li><p>Les nouvelles connexions SSH sont <strong>journalisées</strong></p></li>
-</ul>
-<p><img alt="../_images/script_firewall.PNG" src="../_images/script_firewall.PNG" /></p>
-<p>On restreint les droits sur ce script :</p>
-<p><img alt="../_images/droits_script_firewall.PNG" src="../_images/droits_script_firewall.PNG" /></p>
-<p>On redirige les journaux généré par le parefeu vers le fichier <em>/var/log/iptables.log</em> :</p>
-<p><img alt="../_images/configuration_logging.PNG" src="../_images/configuration_logging.PNG" /></p>
-<div class="section" id="mise-en-place-du-parefeu-local">
-<h3>Mise en place du parefeu local<a class="headerlink" href="#mise-en-place-du-parefeu-local" title="Permalink to this headline">¶</a></h3>
-<p>Appliquons maintenant les politiques définies dans le script :</p>
-<p><img alt="../_images/execution_firewall.PNG" src="../_images/execution_firewall.PNG" /></p>
-<p>Faisons en sorte que ces politiques soient persitantes :</p>
-<p><img alt="../_images/execution_auto_fw.PNG" src="../_images/execution_auto_fw.PNG" /></p>
+<p>Commençons par installer Fail2ban :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">root</span><span class="nd">@host</span><span class="p">:</span><span class="o">~</span><span class="c1"># apt install fail2ban</span>
+</pre></div>
 </div>
-<div class="section" id="test-du-parefeu-local">
-<h3>Test du parefeu local<a class="headerlink" href="#test-du-parefeu-local" title="Permalink to this headline">¶</a></h3>
-<p>Testons nos politiques de parefeu. On ouvre un port sur un port qui n’est pas explicitement autorisé par le firewall :</p>
-<p><img alt="../_images/test_part1.PNG" src="../_images/test_part1.PNG" /></p>
-<p>En se connectant à une autre machine, on remarque que le port est bien bloqué par le firewall, tandis que le port SSH apparaît bien comme ouvert :</p>
-<p><img alt="../_images/test_part2.PNG" src="../_images/test_part2.PNG" /></p>
+<p>Faisons en sorte que fail2ban se lance au démarrage de la machine :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">root</span><span class="nd">@host</span><span class="p">:</span><span class="o">~</span><span class="c1"># systemctl enable fail2ban</span>
+</pre></div>
 </div>
-<div class="section" id="alternative-nftable">
-<h3>Alternative : nftable<a class="headerlink" href="#alternative-nftable" title="Permalink to this headline">¶</a></h3>
-<p>nftable s’impose que la suite logique d’iptable. On proposera donc ici une procédure qui montre comment convertir un firewall iptable existant en un firewall nftable.</p>
-<p>Sauvergardons nos règles iptables appliquées jusqu’à maintenant :</p>
-<p><img alt="../_images/1_save_current_iptables_rules.PNG" src="../_images/1_save_current_iptables_rules.PNG" /></p>
-<p>On convertie nos règles iptable en règle nftable :</p>
-<p><img alt="../_images/2_convert_iptable_to_nftable.PNG" src="../_images/2_convert_iptable_to_nftable.PNG" /></p>
-<p>On exécute ce nouveau script de firewall avec nftable :</p>
-<p><img alt="../_images/3_execute_nftable_rules.PNG" src="../_images/3_execute_nftable_rules.PNG" /></p>
-<p>Voici un aperçu du script firewall en version nftable :</p>
-<p><img alt="../_images/4_save_as_firewall.nft.PNG" src="../_images/4_save_as_firewall.nft.PNG" /></p>
+<p>Nous pouvons maitenant configurer fail2ban. Sa configuration se trouve dans le répertoire <code class="docutils literal notranslate"><span class="pre">/etc/fail2ban</span></code>.</p>
+<div class="section" id="exemple-avec-ssh">
+<h3>Exemple avec ssh<a class="headerlink" href="#exemple-avec-ssh" title="Permalink to this headline">¶</a></h3>
+<p>Si par exemple je veux que fail2ban fonctionne derrière mon service ssh :</p>
+<p>Je crée un fichier <code class="docutils literal notranslate"><span class="pre">hard_ssh.conf</span></code> dans le répertoire <code class="docutils literal notranslate"><span class="pre">/etc/fail2ban/jail.d/</span></code> avec dedans la configuration pour défaut :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">DEFAULT</span><span class="p">]</span>
+<span class="n">ignoreip</span> <span class="o">=</span> <span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span>
+<span class="n">findtime</span> <span class="o">=</span> <span class="mi">10</span><span class="n">m</span>
+<span class="n">bantime</span> <span class="o">=</span> <span class="mi">24</span><span class="n">h</span>
+<span class="n">maxretry</span> <span class="o">=</span> <span class="mi">3</span>
+</pre></div>
 </div>
-<div class="section" id="amelioration-du-parefeu-local">
-<h3>Amélioration du parefeu local<a class="headerlink" href="#amelioration-du-parefeu-local" title="Permalink to this headline">¶</a></h3>
-<p>Ajoutons des règles de filtrage sur le traffic sortant :</p>
-<p><img alt="../_images/1_output_rules.PNG" src="../_images/1_output_rules.PNG" /></p>
-<p>Application des policies par défaut :</p>
-<p><img alt="../_images/2_output_rules.PNG" src="../_images/2_output_rules.PNG" /></p>
+<p>et la configuration spécifique au service ssh :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">sshd</span><span class="p">]</span>
+<span class="n">enabled</span> <span class="o">=</span> <span class="n">true</span>
+<span class="n">port</span> <span class="o">=</span> <span class="mi">22</span>
+<span class="n">logpath</span> <span class="o">=</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">auth</span><span class="o">.</span><span class="n">log</span>
+<span class="n">maxretry</span> <span class="o">=</span> <span class="mi">5</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="poc">
+<h3>PoC<a class="headerlink" href="#poc" title="Permalink to this headline">¶</a></h3>
+<p>Testons fail2ban avec la configuration suivante dans <code class="docutils literal notranslate"><span class="pre">/etc/fail2ban/jail.d/hard_ssh.conf</span></code> :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">DEFAULT</span><span class="p">]</span>
+<span class="n">ignoreip</span> <span class="o">=</span> <span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span>
+<span class="n">findtime</span> <span class="o">=</span> <span class="mi">10</span><span class="n">m</span>
+<span class="n">bantime</span> <span class="o">=</span> <span class="mi">1</span><span class="n">m</span>
+<span class="n">maxretry</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="p">[</span><span class="n">sshd</span><span class="p">]</span>
+<span class="n">enabled</span> <span class="o">=</span> <span class="n">true</span>
+<span class="n">port</span> <span class="o">=</span> <span class="mi">22</span>
+<span class="n">logpath</span> <span class="o">=</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">auth</span><span class="o">.</span><span class="n">log</span>
+<span class="n">maxretry</span> <span class="o">=</span> <span class="mi">5</span>
+</pre></div>
+</div>
+<p>Voici le résultat :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>root@host:~$ ssh toto@172.20.10.3
+toto@172.20.10.3&#39;s password: 
+Permission denied, please try again.
+toto@172.20.10.3&#39;s password: 
+Permission denied, please try again.
+toto@172.20.10.3&#39;s password:
+Permission denied, please try again.
+toto@172.20.10.3&#39;s password:
+Permission denied, please try again.
+toto@172.20.10.3&#39;s password:
+</pre></div>
+</div>
+<p>Au bout de 5 tentatives d’authentification échouées, nous sommes bloqué :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>root@host:~$ ssh spit@172.20.10.3
+ssh: connect to host 172.20.10.3 port 22: Connection refused
+</pre></div>
+</div>
 </div>
 </div>
 <div class="section" id="commentaires">
@@ -267,10 +270,6 @@
            
           </div>
           <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="hardening_openssh.html" class="btn btn-neutral float-right" title="Hardening de OpenSSH" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="application_correctifs.html" class="btn btn-neutral float-left" title="Applications des correctifs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-    </div>
 
   <hr/>
 

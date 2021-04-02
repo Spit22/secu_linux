@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
   
@@ -29,17 +29,16 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Audit Lynis" href="audit_lynis.html" />
+    <link rel="next" title="Mise en place de AppArmor" href="apparmor.html" />
     <link rel="prev" title="Rsyslog" href="rsyslog.html" /> 
 </head>
 
@@ -109,6 +108,10 @@
 <li class="toctree-l2"><a class="reference internal" href="#commentaires">Commentaires</a></li>
 </ul>
 </li>
+</ul>
+<p class="caption"><span class="caption-text">Niveau élevé ANSSI</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="apparmor.html">Mise en place de AppArmor</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Audits de sécurité</span></p>
 <ul>
@@ -185,27 +188,28 @@
 <div class="section" id="classification">
 <h2>Classification<a class="headerlink" href="#classification" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Niveau ANSSI : renforcé</li>
-<li>Audit</li>
-<li>Journalisation</li>
+<li><p>Niveau ANSSI : renforcé</p></li>
+<li><p>Audit</p></li>
+<li><p>Journalisation</p></li>
+<li><p>Moindre privilèges</p></li>
 </ul>
 </div>
 <div class="section" id="sources">
 <h2>Sources<a class="headerlink" href="#sources" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><a class="reference external" href="https://www.ssi.gouv.fr/uploads/2016/01/linux_configuration-fr-v1.2.pdf">ANSSI</a></li>
-<li><a class="reference external" href="https://github.com/Neo23x0/auditd">Neo23x0</a></li>
-<li><a class="reference external" href="https://highon.coffee/blog/security-harden-centos-7/#auditd---audit-daemon">highon.coffee</a></li>
-<li><a class="reference external" href="https://github.com/linux-audit/audit-userspace/tree/master/rules">linux-audit</a></li>
-<li><a class="reference external" href="https://connect.ed-diamond.com/GNU-Linux-Magazine/GLMFHS-093/Journalisez-les-actions-de-vos-utilisateurs-avec-Auditd">connect.ed-diamond.com</a></li>
-<li><a class="reference external" href="https://linux-audit.com/configuring-and-auditing-linux-systems-with-audit-daemon/">linux-audit.com</a></li>
+<li><p><a class="reference external" href="https://www.ssi.gouv.fr/uploads/2016/01/linux_configuration-fr-v1.2.pdf">ANSSI</a></p></li>
+<li><p><a class="reference external" href="https://github.com/Neo23x0/auditd">Neo23x0</a></p></li>
+<li><p><a class="reference external" href="https://highon.coffee/blog/security-harden-centos-7/#auditd---audit-daemon">highon.coffee</a></p></li>
+<li><p><a class="reference external" href="https://github.com/linux-audit/audit-userspace/tree/master/rules">linux-audit</a></p></li>
+<li><p><a class="reference external" href="https://connect.ed-diamond.com/GNU-Linux-Magazine/GLMFHS-093/Journalisez-les-actions-de-vos-utilisateurs-avec-Auditd">connect.ed-diamond.com</a></p></li>
+<li><p><a class="reference external" href="https://linux-audit.com/configuring-and-auditing-linux-systems-with-audit-daemon/">linux-audit.com</a></p></li>
 </ul>
 </div>
 <div class="section" id="procedures">
 <h2>Procédures<a class="headerlink" href="#procedures" title="Permalink to this headline">¶</a></h2>
 <p>Installons les paquets nécessaires au bon fonctionnement d’auditd :</p>
 <p><img alt="../_images/1_install_package.PNG" src="../_images/1_install_package.PNG" /></p>
-<p>Définissons ensuite les règles d’audit :</p>
+<p>Définissons ensuite les règles d’audit dans le /etc/auditd/audit.rules:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">## First rule - delete all</span>
 <span class="o">-</span><span class="n">D</span>
 
@@ -486,12 +490,15 @@
 <span class="o">-</span><span class="n">w</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">nmap</span> <span class="o">-</span><span class="n">p</span> <span class="n">x</span> <span class="o">-</span><span class="n">k</span> <span class="n">susp_activity</span>
 </pre></div>
 </div>
-<p>Vérifions que auditd fonctionne et joue son rôle</p>
+<p>Vérifions que auditd fonctionne et joue son rôle. On appelle la commande base64, qui est surveillée car elle peut être utilisée pour de l’extraction de données :</p>
 <p><img alt="../_images/3_testing_suspicious_call.PNG" src="../_images/3_testing_suspicious_call.PNG" /></p>
+<p>On remarque alors dans les logs d’auditd que l’action a bien été tracée :</p>
 <p><img alt="../_images/4_show_appears_in_logs.PNG" src="../_images/4_show_appears_in_logs.PNG" /></p>
 </div>
 <div class="section" id="commentaires">
 <h2>Commentaires<a class="headerlink" href="#commentaires" title="Permalink to this headline">¶</a></h2>
+<p>Ici, le choix a été fait de ne surveiller que les éléments qui nous semblaient essentiels <strong>pour notre utilisation</strong>. Il faut bien noter que ce fichier est à adapter en fonction des besoins.</p>
+<p>/!\ Il faut porter une attention particulière à la charge que peut apporter chacune des règles. En effet, on pourrait faire le choix, par exemple, de logguer toutes les commandes exécutées sous l’utilisateur root. Cependant, de trop nombreux logs seraient générés, et il deviendrait alors difficile d’exploiter tous les logs (notamment vis-à-vis des ressources de la machine).</p>
 </div>
 </div>
 
@@ -501,7 +508,7 @@
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="audit_lynis.html" class="btn btn-neutral float-right" title="Audit Lynis" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="apparmor.html" class="btn btn-neutral float-right" title="Mise en place de AppArmor" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
         <a href="rsyslog.html" class="btn btn-neutral float-left" title="Rsyslog" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 

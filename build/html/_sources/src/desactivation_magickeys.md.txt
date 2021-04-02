@@ -6,6 +6,7 @@ Les _Magics keys_ peuvent avoir un impact énorme sur un système Linux (redéma
 
 * Niveau ANSSI : intermédiaire
 * Sécurité physique
+* Défense en profondeur
 
 ## Sources
 
@@ -18,7 +19,7 @@ Vérifions si les _magic keys_ sont activées ou non :
 
 ![](img/desactivation_magickeys/1_is_activated.PNG)
 
-Si elles sont activées, désactivons les :
+Si la valeur retournée est différente de 0, désactivons les :
 
 ![](img/desactivation_magickeys/2_disable_in_sysctl_conf.PNG)
 

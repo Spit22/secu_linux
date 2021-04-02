@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
   
@@ -29,10 +29,9 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/language_data.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -110,6 +109,10 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="auditd.html">Auditd</a></li>
 </ul>
+<p class="caption"><span class="caption-text">Niveau élevé ANSSI</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="apparmor.html">Mise en place de AppArmor</a></li>
+</ul>
 <p class="caption"><span class="caption-text">Audits de sécurité</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="audit_lynis.html">Audit Lynis</a></li>
@@ -186,24 +189,28 @@
 <div class="section" id="classification">
 <h2>Classification<a class="headerlink" href="#classification" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Niveau ANSSI : intermédiaire</li>
-<li>Gestion utilisateurs</li>
-<li>Gestion des droits des utilisateurs</li>
+<li><p>Niveau ANSSI : intermédiaire</p></li>
+<li><p>Gestion utilisateurs</p></li>
+<li><p>Gestion des droits des utilisateurs</p></li>
+<li><p>Moindre privilège</p></li>
+<li><p>Défense en profondeur</p></li>
 </ul>
 </div>
 <div class="section" id="sources">
 <h2>Sources<a class="headerlink" href="#sources" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><a class="reference external" href="https://www.ssi.gouv.fr/uploads/2016/01/linux_configuration-fr-v1.2.pdf">ANSSI</a></li>
+<li><p><a class="reference external" href="https://www.ssi.gouv.fr/uploads/2016/01/linux_configuration-fr-v1.2.pdf">ANSSI</a></p></li>
 </ul>
 </div>
 <div class="section" id="procedures">
 <h2>Procédures<a class="headerlink" href="#procedures" title="Permalink to this headline">¶</a></h2>
-<p>Ajoutons l’utilisateur <em>bastien</em> au groupe <em>sudo</em> :</p>
+<p>On suppose que l’utilisateur bastien est administrateur système de la machine. Il doit donc pouvoir effectuer des actions root sur l’ensemble des commandes de la machine.</p>
+<p>Ajoutons l’utilisateur <em>bastien</em> au groupe <em>sudo</em>, tel que ce dernier puisse avoir un rôle d’administrateur de la machine :</p>
 <p><img alt="../_images/1_ajout_bastien_dans_sudo.PNG" src="../_images/1_ajout_bastien_dans_sudo.PNG" /></p>
 <p>Vérifions que <em>bastien</em> a bien des droits sudo en tentant d’accéder au fichier <em>/etc/shadow</em> :</p>
 <p><img alt="../_images/2_verification.PNG" src="../_images/2_verification.PNG" /></p>
-<p>Nous pouvons également limiter les droits sudo à des applications spécifiques, exemple avec l’utilisateur stagiaire. On octroit des droits sudo à cet utilisateur seulement lors de l’utilisation de nmap :</p>
+<p>On suppose désormais qu’un utilisateur <em>stagiaire</em> est besoin d’exécuter nmap en root pour effectuer des scans UDP.
+Nous pouvons également limiter les droits sudo à des applications spécifiques. On octroit des droits sudo à cet utilisateur seulement lors de l’utilisation de nmap :</p>
 <p><img alt="../_images/3_ajout_stagiaire_pour_exec_nmap_en_root.PNG" src="../_images/3_ajout_stagiaire_pour_exec_nmap_en_root.PNG" /></p>
 <p>Le stagiaire a donc le droit d’exécuter nmap en tant qu’utilisateur root :</p>
 <p><img alt="../_images/4_verif_stagiaire.PNG" src="../_images/4_verif_stagiaire.PNG" /></p>
@@ -212,6 +219,8 @@
 </div>
 <div class="section" id="commentaires">
 <h2>Commentaires<a class="headerlink" href="#commentaires" title="Permalink to this headline">¶</a></h2>
+<p>Il faut garder à l’esprit que la meilleure bonne pratique consiste à éviter l’usage du ALL:ALL lors de la définition des droits sudo, et de privilégier l’usage de sudo pour des commandes spécifiques. Cependant, il est courant qu’un utilisateur ait besoin d’avoir l’équivalent d’un accès root (s’il est administrateur système par exemple), et donc l’usage du ALL:ALL est nécessaire.</p>
+<p>/!\ Certaines applications permettent d’exécuter des shells -&gt; donner un droit sudo sur ces commandes peut résulter en l’obtention d’un shell root ! (exemple : vim, cat, etc.)</p>
 </div>
 </div>
 
