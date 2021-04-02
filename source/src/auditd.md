@@ -6,6 +6,7 @@
 * Niveau ANSSI : renforcé
 * Audit
 * Journalisation
+* Moindre privilèges
 
 ## Sources
 
@@ -22,7 +23,7 @@ Installons les paquets nécessaires au bon fonctionnement d'auditd :
 
 ![](img/Auditd/1_install_package.PNG)
 
-Définissons ensuite les règles d'audit :
+Définissons ensuite les règles d'audit dans le /etc/auditd/audit.rules:
 
     ## First rule - delete all
     -D
@@ -303,14 +304,17 @@ Définissons ensuite les règles d'audit :
     -w /usr/bin/rdesktop -p x -k susp_activity
     -w /usr/bin/nmap -p x -k susp_activity
 
-Vérifions que auditd fonctionne et joue son rôle
+Vérifions que auditd fonctionne et joue son rôle. On appelle la commande base64, qui est surveillée car elle peut être utilisée pour de l'extraction de données :
 
 ![](img/Auditd/3_testing_suspicious_call.PNG)
+
+On remarque alors dans les logs d'auditd que l'action a bien été tracée :
 
 ![](img/Auditd/4_show_appears_in_logs.PNG)
 
 
-
 ## Commentaires
 
-test
+Ici, le choix a été fait de ne surveiller que les éléments qui nous semblaient essentiels **pour notre utilisation**. Il faut bien noter que ce fichier est à adapter en fonction des besoins.
+
+/!\ Il faut porter une attention particulière à la charge que peut apporter chacune des règles. En effet, on pourrait faire le choix, par exemple, de logguer toutes les commandes exécutées sous l'utilisateur root. Cependant, de trop nombreux logs seraient générés, et il deviendrait alors difficile d'exploiter tous les logs (notamment vis-à-vis des ressources de la machine).
