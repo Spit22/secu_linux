@@ -41,6 +41,15 @@
 
 .. toctree::
    :maxdepth: 2
+   :caption: Niveau élevé ANSSI
+
+   src/apparmor
+
+
+=============================================
+
+.. toctree::
+   :maxdepth: 2
    :caption: Audits de sécurité
 
    src/audit_lynis
